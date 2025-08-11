@@ -5,30 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dr. Martens – katalog | Poslední kusy</title>
   <meta name="description" content="Katalog posledních párů Dr. Martens. Kontakt přes WhatsApp / Messenger – domluvíme doručení / dobírku / osobně.">
+
   <style>
     :root{ --bg:#0b0b0c; --panel:#121214; --muted:#7a7a80; --text:#eaeaf0; --brand:#ffd200; --brand-ink:#151515; --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35) }
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
     a{color:inherit}
 
-    /* Top */
+    /* Top bar */
     .topbar{
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: linear-gradient(180deg, rgba(18,18,20,.96), rgba(18,18,20,.86));
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid #1e1e22;
-  padding-top: env(safe-area-inset-top);       /* pro notch */
-  transition: transform .25s ease;             /* animace schování */
-}
-.topbar.hide{
-  transform: translateY(calc(-100% - env(safe-area-inset-top)));
-}
+      position:sticky;top:0;z-index:40;
+      background:linear-gradient(180deg, rgba(18,18,20,.96), rgba(18,18,20,.86));
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid #1e1e22;
+      padding-top: env(safe-area-inset-top);
+      transition: transform .25s ease;
+    }
+    .topbar.hide{ transform: translateY(calc(-100% - env(safe-area-inset-top))); }
+
     .container{max-width:1100px;margin:0 auto;padding:16px}
     .brand{display:flex;gap:12px;align-items:center}
     .logo{width:42px;height:42px;border-radius:12px;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-weight:800}
     .brand h1{font-size:20px;margin:0}
     .brand small{color:var(--muted)}
+
     .controls{display:grid;grid-template-columns: 1fr 140px 160px;gap:10px;margin-top:12px}
     .input,select,button{background:#1a1a1f;border:1px solid #26262b;color:var(--text);border-radius:12px;padding:12px 14px;font-size:14px}
     .input:focus,select:focus{outline:2px solid #2a2a33;border-color:#2a2a33}
@@ -42,12 +41,12 @@
     .badge{padding:6px 10px;border-radius:999px;background:#1a1a1f;border:1px solid #26262b;color:#c9c9cf;font-size:12px}
     .badge.brand{background:var(--brand);color:#111;border:none;font-weight:800}
 
-    /* Grid */
+    /* Grid + cards */
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:16px}
     .card{background:linear-gradient(180deg,#151518,#121214);border:1px solid #1c1c21;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
     .media{
-      position:relative;background:#0f0f12;
-      height:250px;display:grid;place-items:center;overflow:hidden;cursor:pointer;
+      position:relative;background:#0f0f12;height:250px;
+      display:grid;place-items:center;overflow:hidden;cursor:pointer;
     }
     .media::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .3s ease}
     .media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
@@ -82,12 +81,9 @@
     .modal .opt{display:flex;gap:10px;margin:12px 0 16px}
     .opt select{flex:1}
     .close{
-  position:absolute;top:10px;right:10px;
-  border:none;background:#1a1a1f;border:1px solid #2a2a2f;color:#ddd;
-  border-radius:12px; padding:0; width:44px; height:44px;
-  display:grid; place-items:center; font-size:20px; cursor:pointer; z-index:5;
-}
-
+      position:absolute;top:10px;right:10px;border:none;background:#1a1a1f;border:1px solid #2a2a2f;color:#ddd;
+      border-radius:12px;padding:0;width:44px;height:44px;display:grid;place-items:center;font-size:20px;cursor:pointer;z-index:5;
+    }
     .navbtn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid #2a2a2f;color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}
     .navbtn.prev{left:10px}
     .navbtn.next{right:10px}
@@ -112,9 +108,7 @@
       </div>
       <div class="controls" role="search" aria-label="Filtry katalogu">
         <input class="input" id="q" placeholder="Hledat: model / barva / kód…" aria-label="Hledat">
-        <select id="size" aria-label="Velikost">
-          <option value="">Velikost (EU)</option>
-        </select>
+        <select id="size" aria-label="Velikost"><option value="">Velikost (EU)</option></select>
         <button class="cta" id="contactAll" title="Kontaktovat">Kontaktovat</button>
       </div>
       <div class="hero">
@@ -177,82 +171,21 @@
       messenger: "https://m.me/61575315234939"
     };
 
-    /* Placeholder obrázek pro chyby */
-    const PLACEHOLDER_SVG =
-      'data:image/svg+xml,' +
-      encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450'><rect width='600' height='450' fill='#0a0a0c'/><text x='50%' y='52%' fill='#7a7a80' text-anchor='middle' font-size='24' font-family='Arial'>Foto bude doplněno</text></svg>");
+    /* Placeholder obrázek */
+    const PLACEHOLDER_SVG = 'data:image/svg+xml,'+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450'><rect width='600' height='450' fill='#0a0a0c'/><text x='50%' y='52%' fill='#7a7a80' text-anchor='middle' font-size='24' font-family='Arial'>Foto bude doplněno</text></svg>");
     function fallbackImg(img){ img.onerror=null; img.src=PLACEHOLDER_SVG; }
 
-    /* ===== PRODUKTY – Polley → LEO ===== */
+    /* ===== PRODUKTY – Polley → LEO (zkrácený výběr s tvými názvy souborů) ===== */
     const PRODUCTS = [
-      { id:"polley-5027", name:"Dr. Martens Polley – Černé Mary Jane", sizes:["37"], price:2990,
-        imgs:[ "images/REPLACE-polley-1.jpg","images/REPLACE-polley-2.jpg" ] },
-
-      { id:"drench-holinky", name:"Dr. Martens Drench – Černé holínky", sizes:["37","38"], price:990,
-        imgs:[ "images/Drench holinky.webp" ] },
-
-      { id:"bbex-tan-bex-1460", name:"Dr. Martens 1460 Bex – Hnědé kožené", sizes:["43"], price:3499,
-        imgs:[ "images/REPLACE-1460-bex-1.jpg","images/REPLACE-1460-bex-2.jpg" ] },
-
-      { id:"cesca-red-r-3j65", name:"Dr. Martens Cesca – Červené kožené", sizes:["38","39"], price:990,
-        imgs:[ "images/REPLACE-cesca-red-1.jpg" ] },
-
-      { id:"kara-red-r3j64", name:"Dr. Martens Kara – Červené kožené", sizes:["38","39"], price:1099,
-        imgs:[ "images/REPLACE-kara-red-1.jpg" ] },
-
-      { id:"serena-1460", name:"Dr. Martens Serena – Černé s kožíškem", sizes:["38","39","40"], price:3499,
-        imgs:[ "images/REPLACE-serena-1.jpg","images/REPLACE-serena-2.jpg" ] },
-
-      { id:"b1420", name:"Dr. Martens B1420 – Černé se zipem", sizes:["38","39","40"], price:1499,
-        imgs:[ "images/REPLACE-b1420-1.jpg" ] },
-
-      { id:"redford-navy", name:"Dr. Martens Redford – Námořnická modrá", sizes:["43"], price:1999,
-        imgs:[ "images/Redford Navy 1.webp","images/Redford Navy 2.webp","images/Redford Navy 3.webp","images/Redford Navy.webp" ] },
-
-      { id:"n1460-nappa", name:"Dr. Martens 1460 – Nappa", sizes:["38"], price:2990,
-        imgs:[ "images/Nappa 1460 1.avif","images/Nappa 1460 2.avif","images/Nappa 1460 3.avif","images/Nappa 1460.avif" ] },
-
-      { id:"bpat-1460-bex-pascal", name:"Dr. Martens 1460 Pascal Bex – Tan Inuck", sizes:["37"], price:3499,
-        imgs:[ "images/Bex pascal 1460 1.jpg","images/Bex pascal 1460 2.webp","images/Bex pascal 1460.jpg" ] },
-
-      { id:"wbsm-1460", name:"Dr. Martens 1460 – Černé s bílým šitím", sizes:["38"], price:3499,
-        imgs:[ "images/REPLACE-1460-wbsm-1.jpg" ] },
-
-      { id:"hicky-1460", name:"Dr. Martens 1460 – Černé s kontrastními tkaničkami", sizes:["37","38"], price:1999,
-        imgs:[ "images/Hickey 1460 1.webp","images/Hickey 1460 2.webp","images/Hickey 1460.webp" ] },
-
-      { id:"chay-1460", name:"Dr. Martens 1460 – Černé s puntíky", sizes:["37","38"], price:3499,
-        imgs:[ "images/Chay 1460 1.webp","images/Chay 1460 2.webp","images/Chay 1460.webp" ] },
-
-      { id:"bg-939-black-greasy", name:"Dr. Martens 939 – Black Greasy", sizes:["39","43"], price:3499,
-        imgs:[ "images/BG 939 1.webp","images/BG 939 2.webp","images/BG 939 3.webp","images/BG 939.webp" ] },
-
-      { id:"reeder", name:"Dr. Martens Reeder – Černé kožené", sizes:["43"], price:2990,
-        imgs:[ "images/Reeder 1.avif","images/Reeder 1.webp","images/Reeder 2.webp","images/Reeder 3.webp","images/Reeder.webp" ] },
-
-      { id:"bc-1460", name:"Dr. Martens 1460 – Růžové kožené", sizes:["37","38"], price:1990,
-        imgs:[ "images/REPLACE-1460-pink-1.jpg" ] },
-
-      { id:"g-ch1461", name:"Dr. Martens 1461 – Černé kožené", sizes:["43"], price:2990,
-        imgs:[ "images/REPLACE-1461-black-1.jpg" ] },
-
-      { id:"amor-1461", name:"Dr. Martens 1461 Amor – Černé", sizes:["37"], price:2990,
-        imgs:[ "images/Amor 1461.webp","images/Amor 1461 2.webp","images/Amor 1461 3.webp","images/Amor-1461-1.webp" ] },
-
-      { id:"bpat1461", name:"Dr. Martens 1461 Bex – Černé kožené", sizes:["37"], price:1499,
-        imgs:[ "images/REPLACE-1461-bex-1.jpg" ] },
-
-      { id:"flora-1460-dfl", name:"Dr. Martens Flora – Černé kožené", sizes:["37","38"], price:3499,
-        imgs:[ "images/Flora 1460 1.webp","images/Flora 1460 2.webp","images/Flora 1460.webp" ] },
-
-      { id:"flora-1460-navy", name:"Dr. Martens Flora – Námořnická modrá", sizes:["38","39"], price:3499,
-        imgs:[ "images/Flora navy 1460 1.webp","images/Flora navy 1460 2.webp","images/Flora navy 1460.webp" ] },
-
-      { id:".939-misc", name:"Dr. Martens 939 – Černé kožené", sizes:["36","39","43"], price:2999,
-        imgs:[ "images/REPLACE-939-1.jpg" ] },
-
-      { id:"leo-1460", name:"Dr. Martens 1460 – Leopardí vzor", sizes:["37","38","39"], price:1499,
-        imgs:[ "images/LEO 1460 1.avif","images/LEO 1460.avif" ] }
+      { id:"polley-5027", name:"Dr. Martens Polley – Černé Mary Jane", sizes:["37"], price:2990, imgs:["images/REPLACE-polley-1.jpg","images/REPLACE-polley-2.jpg"] },
+      { id:"drench-holinky", name:"Dr. Martens Drench – Černé holínky", sizes:["37","38"], price:990, imgs:["images/Drench holinky.webp"] },
+      { id:"bpat-1460-bex-pascal", name:"Dr. Martens 1460 Pascal Bex – Tan Inuck", sizes:["37"], price:3499, imgs:["images/Bex pascal 1460 1.jpg","images/Bex pascal 1460 2.webp","images/Bex pascal 1460.jpg"] },
+      { id:"bg-939-black-greasy", name:"Dr. Martens 939 – Black Greasy", sizes:["39","43"], price:3499, imgs:["images/BG 939 1.webp","images/BG 939 2.webp","images/BG 939 3.webp","images/BG 939.webp"] },
+      { id:"reeder", name:"Dr. Martens Reeder – Černé kožené", sizes:["43"], price:2990, imgs:["images/Reeder 1.avif","images/Reeder 1.webp","images/Reeder 2.webp","images/Reeder 3.webp","images/Reeder.webp"] },
+      { id:"amor-1461", name:"Dr. Martens 1461 Amor – Černé", sizes:["37"], price:2990, imgs:["images/Amor 1461.webp","images/Amor 1461 2.webp","images/Amor 1461 3.webp","images/Amor-1461-1.webp"] },
+      { id:"flora-1460-dfl", name:"Dr. Martens Flora – Černé kožené", sizes:["37","38"], price:3499, imgs:["images/Flora 1460 1.webp","images/Flora 1460 2.webp","images/Flora 1460.webp"] },
+      { id:"flora-1460-navy", name:"Dr. Martens Flora – Námořnická modrá", sizes:["38","39"], price:3499, imgs:["images/Flora navy 1460 1.webp","images/Flora navy 1460 2.webp","images/Flora navy 1460.webp"] },
+      { id:"leo-1460", name:"Dr. Martens 1460 – Leopardí vzor", sizes:["37","38","39"], price:1499, imgs:["images/LEO 1460 1.avif","images/LEO 1460.avif"] }
     ];
 
     /* ===== HELPERS ===== */
@@ -262,8 +195,7 @@
 
     /* Sizes → filtr */
     const ALL_SIZES = [...new Set(PRODUCTS.flatMap(p => p.sizes))].sort((a,b)=>+a-+b);
-    const sizeSel = el('#size');
-    ALL_SIZES.forEach(s => { const o=document.createElement('option'); o.value=s; o.textContent=`EU ${s}`; sizeSel.appendChild(o); });
+    const sizeSel = el('#size'); ALL_SIZES.forEach(s=>{ const o=document.createElement('option'); o.value=s; o.textContent=`EU ${s}`; sizeSel.appendChild(o); });
 
     /* Footer + kontakty */
     el('#waLink').href = waLink('Ahoj, mám dotaz k botám z katalogu.');
@@ -309,13 +241,12 @@
           const id = article ? article.querySelector('.detail').getAttribute('data-id') : a.getAttribute('data-id');
           const prod = PRODUCTS.find(x=>x.id===id);
           if(!prod) return;
-          if(a.classList.contains('contact')) {
-            // kontaktovat → WhatsApp
+          if(a.classList.contains('contact')){
             const base = `${STORE.whatsappGreeting}
 ${prod.name}
 Velikost: ${(prod.sizes && prod.sizes[0]) ? prod.sizes[0] : ''}
 Město: ${STORE.city}`;
-            window.open(waLink(base), '_blank');
+            window.open(waLink(base),'_blank');
           } else {
             openDetail(prod);
           }
@@ -338,72 +269,55 @@ Město: ${STORE.city}`;
     el('#q').addEventListener('input', applyFilters);
     el('#size').addEventListener('input', applyFilters);
 
-    /* Modal + šipky */
-    const detail = el('#detail');
-const detail = el('#detail');
+    /* Modal + šipky + zavírání */
+    const detail = el('#detail');   // ← deklarace pouze jednou
 
-// 🔹 Helper funkce
-function openDlg(){ 
-  if (detail.showModal) detail.showModal(); 
-  else detail.setAttribute('open',''); 
-}
-function closeDlg(){ 
-  if (detail.close) detail.close(); 
-  else detail.removeAttribute('open'); 
-}
+    function openDlg(){ if(detail.showModal) detail.showModal(); else detail.setAttribute('open',''); }
+    function closeDlg(){ if(detail.close) detail.close(); else detail.removeAttribute('open'); }
 
-// 🔹 Zavření klikem mimo obsah
-detail.addEventListener('click', (e) => {
-  if (e.target === detail) closeDlg();
-});
+    // klik na backdrop zavře
+    detail.addEventListener('click', (e)=>{ if(e.target===detail) closeDlg(); });
 
-// 🔹 Swipe-down na mobilu
-let touchStartY = null;
-detail.addEventListener('touchstart', (e) => { 
-  touchStartY = e.touches[0].clientY; 
-}, {passive:true});
-detail.addEventListener('touchmove',  (e) => {
-  if (touchStartY == null) return;
-  const dy = e.touches[0].clientY - touchStartY;
-  if (dy > 80) { 
-    closeDlg(); 
-    touchStartY = null; 
-  }
-}, {passive:true});
-detail.addEventListener('touchend', () => { 
-  touchStartY = null; 
-});
+    // swipe-down zavře
+    let touchStartY=null;
+    detail.addEventListener('touchstart',(e)=>{touchStartY=e.touches[0].clientY;},{passive:true});
+    detail.addEventListener('touchmove',(e)=>{
+      if(touchStartY==null) return;
+      const dy=e.touches[0].clientY-touchStartY;
+      if(dy>80){ closeDlg(); touchStartY=null; }
+    },{passive:true});
+    detail.addEventListener('touchend',()=>{ touchStartY=null; });
 
-    let curImgs = [], curIdx = 0;
+    let curImgs=[], curIdx=0;
     function setMain(i){
       if(!curImgs.length){ el('#dimg').src=''; return; }
-      if(i<0) i = curImgs.length-1;
-      if(i>=curImgs.length) i = 0;
-      curIdx = i;
-      el('#dimg').src = curImgs[i];
-      el('#dimg').onerror = () => fallbackImg(el('#dimg'));
+      if(i<0) i=curImgs.length-1;
+      if(i>=curImgs.length) i=0;
+      curIdx=i;
+      el('#dimg').src=curImgs[i];
+      el('#dimg').onerror=()=>fallbackImg(el('#dimg'));
     }
     function openDetail(p){
-      el('#dtitle').textContent = p.name;
-      el('#dmeta').textContent = '';
-      el('#dprice').textContent = money(p.price);
-      el('#dwas').textContent = p.was ? money(p.was) : '';
-      el('#dcode').textContent = p.code ? `Kód: ${p.code}` : '';
-      const dsize = el('#dsize'); dsize.innerHTML='';
+      el('#dtitle').textContent=p.name;
+      el('#dmeta').textContent='';
+      el('#dprice').textContent=money(p.price);
+      el('#dwas').textContent=p.was?money(p.was):'';
+      el('#dcode').textContent=p.code?`Kód: ${p.code}`:'';
+
+      const dsize=el('#dsize'); dsize.innerHTML='';
       (p.sizes||[]).forEach(s=>{ const o=document.createElement('option'); o.value=s; o.textContent=`EU ${s}`; dsize.appendChild(o); });
 
-      curImgs = (p.imgs && p.imgs.length) ? p.imgs : [];
+      curImgs=(p.imgs&&p.imgs.length)?p.imgs:[];
       setMain(0);
-
-      el('#prevImg').onclick = ()=> setMain(curIdx-1);
-      el('#nextImg').onclick = ()=> setMain(curIdx+1);
+      el('#prevImg').onclick=()=>setMain(curIdx-1);
+      el('#nextImg').onclick=()=>setMain(curIdx+1);
 
       const base = `${STORE.whatsappGreeting}
 ${p.name}
 Velikost: ${(p.sizes&&p.sizes[0])?p.sizes[0]:''}
 Město: ${STORE.city}`;
       el('#dwhats').href = waLink(base);
-      el('#dmsgr').href = STORE.messenger;
+      el('#dmsgr').href  = STORE.messenger;
       dsize.addEventListener('change', function(){
         const b = `${STORE.whatsappGreeting}
 ${p.name}
@@ -412,28 +326,23 @@ Město: ${STORE.city}`;
         el('#dwhats').href = waLink(b);
       });
 
-      detail.showModal();
+      openDlg();
     }
 
+    /* Auto-hide topbar na mobilu */
+    (function(){
+      const bar=document.querySelector('.topbar'); if(!bar) return;
+      let lastY=window.scrollY||0;
+      window.addEventListener('scroll',()=>{
+        const y=window.scrollY||0;
+        if(y>lastY+6 && y>80) bar.classList.add('hide');
+        else if(y<lastY-6) bar.classList.remove('hide');
+        lastY=y;
+      },{passive:true});
+    })();
+
     /* Start */
-    el('#waLink').href = waLink('Ahoj, mám dotaz k botám z katalogu.');
-    el('#telLink').href = 'tel:'+STORE.phone;
     applyFilters();
-// Auto-hide topbar na mobilu: schovej při scrollu dolů, ukaž při scrollu nahoru
-(function(){
-  const bar = document.querySelector('.topbar');
-  if(!bar) return;
-  let lastY = window.scrollY || 0;
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY || 0;
-    if (y > lastY + 6 && y > 80) {
-      bar.classList.add('hide');     // jedeš dolů → schovej
-    } else if (y < lastY - 6) {
-      bar.classList.remove('hide');  // jedeš nahoru → ukaž
-    }
-    lastY = y;
-  }, { passive: true });
-})();
   </script>
 </body>
 </html>
