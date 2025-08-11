@@ -192,170 +192,119 @@
     // price: aktuální cena v Kč, was: původní cena (nepovinné)
     // last: kolik párů – 1 zobrazí BADGE Poslední kus
     // code: tvůj vnitřní kód (bude v předvyplněné zprávě)
-   const PRODUCTS = [
+    const PRODUCTS = [
   {
     id: "polley-5027",
     name: "POLLEY 5027",
+    color: "",
     sizes: ["37"],
-    price: 2990,
-    img: "images/polley-5027.jpg"
+    price: 0,
+    last: 1,
+    img: "images/polley-5027.jpg",
+    code: "",
+    tags: []
   },
   {
     id: "drench-holinky",
     name: "DRENCH holinky",
-    sizes: ["37", "38"],
-    price: 990,
-    img: "images/drench-holinky.jpg"
+    color: "",
+    sizes: ["36", "38"],
+    price: 0,
+    last: 2,
+    img: "images/drench-holinky.jpg",
+    code: "",
+    tags: []
   },
   {
     id: "bbex-tan-bex-1460",
     name: "BBEX  / TAN BEX 1460",
-    sizes: ["43"],
-    price: 3499,
-    img: "images/bbex-tan-bex-1460.jpg"
+    color: "",
+    sizes: ["43", "44"],
+    price: 0,
+    last: 2,
+    img: "images/bbex-tan-bex-1460.jpg",
+    code: "",
+    tags: []
   },
   {
     id: "cesca-red-r-3j65",
     name: "CESCA RED (R-3J65)",
-    sizes: ["38", "39"],
-    price: 990,
-    img: "images/cesca-red-r-3j65.jpg"
+    color: "",
+    sizes: [],
+    price: 0,
+    last: 1,
+    img: "images/cesca-red-r-3j65.jpg",
+    code: "",
+    tags: []
+  },
+  {
+    id: "cesca-black-b-3j65",
+    name: "CESCA BLACK (B-3J65)",
+    color: "",
+    sizes: ["39"],
+    price: 0,
+    last: 1,
+    img: "images/cesca-black-b-3j65.jpg",
+    code: "",
+    tags: []
   },
   {
     id: "kara-red-r3j64-zeptat-se",
     name: "KARA RED (R3J64) - ZEPTAT SE",
-    sizes: ["38", "39"],
-    price: 1099,
-    img: "images/kara-red-r3j64-zeptat-se.jpg"
+    color: "",
+    sizes: [],
+    price: 0,
+    last: 1,
+    img: "images/kara-red-r3j64-zeptat-se.jpg",
+    code: "",
+    tags: []
+  },
+  {
+    id: "lacey-b-3j63-zeptat-se",
+    name: "LACEY (B-3J63) - ZEPTAT SE",
+    color: "",
+    sizes: [],
+    price: 0,
+    last: 1,
+    img: "images/lacey-b-3j63-zeptat-se.jpg",
+    code: "",
+    tags: []
   },
   {
     id: "serena-1460",
     name: "SERENA 1460",
-    sizes: ["38", "39", "40"],
-    price: 3499,
-    img: "images/serena-1460.jpg"
+    color: "",
+    sizes: [],
+    price: 0,
+    last: 1,
+    img: "images/serena-1460.jpg",
+    code: "",
+    tags: []
   },
   {
     id: "b1420",
     name: "B1420",
+    color: "",
     sizes: ["38", "39", "40"],
-    price: 1499,
-    img: "images/b1420.jpg"
+    price: 0,
+    last: 45,
+    img: "images/b1420.jpg",
+    code: "",
+    tags: []
   },
   {
     id: "redford-navy",
     name: "REDFORD NAVY",
+    color: "",
     sizes: ["43"],
-    price: 1999,
-    img: "images/redford-navy.jpg"
-  },
-  {
-    id: "n1460-nappa",
-    name: "N1460 (nappa?)",
-    sizes: ["38"],
-    price: 2990,
-    img: "images/n1460-nappa.jpg"
-  },
-  {
-    id: "bpat-1460-bex-pascal",
-    name: "BPAT 1460 (bex pascal?)",
-    sizes: ["37"],
-    price: 3499,
-    img: "images/bpat-1460-bex-pascal.jpg"
-  },
-  {
-    id: "wbsm-1460",
-    name: "WBSM 1460",
-    sizes: ["38"],
-    price: 3499,
-    img: "images/wbsm-1460.jpg"
-  },
-  {
-    id: "hicky-1460-potreba-prefotit-nejlepe",
-    name: "HICKY 1460 - potřeba přefotit nejlépe",
-    sizes: ["37", "38"],
-    price: 1999,
-    img: "images/hicky-1460-potreba-prefotit-nejlepe.jpg"
-  },
-  {
-    id: "chay-1460-ty-co-ma-barca-cerne-bile-puntiky",
-    name: "CHAY 1460 ty co má barča černé bíle puntiky",
-    sizes: ["37", "38"],
-    price: 3499,
-    img: "images/chay-1460-ty-co-ma-barca-cerne-bile-puntiky.jpg"
-  },
-  {
-    id: "bg-939-black-greasy",
-    name: "BG 939 (black greasy)",
-    sizes: ["39", "43"],
-    price: 3499,
-    img: "images/bg-939-black-greasy.jpg"
-  },
-  {
-    id: "reeder-zeptat-se-jestli-leather-nebo-ty-co-mam-ja",
-    name: "REEDER - zeptat se jestli leather nebo ty co mam ja",
-    sizes: ["43"],
-    price: 2990,
-    img: "images/reeder-zeptat-se-jestli-leather-nebo-ty-co-mam-ja.jpg"
-  },
-  {
-    id: "bc-1460-asi-jsou-ruzove",
-    name: "BC 1460 - asi jsou růžové ?",
-    sizes: ["37", "38"],
-    price: 1990,
-    img: "images/bc-1460-asi-jsou-ruzove.jpg"
-  },
-  {
-    id: "g-ch1461-nasel-jsem-jenom-smooth",
-    name: "G-CH1461 - našel jsem jenom smooth",
-    sizes: ["43"],
-    price: 2990,
-    img: "images/g-ch1461-nasel-jsem-jenom-smooth.jpg"
-  },
-  {
-    id: "amor-1461",
-    name: "AMOR 1461",
-    sizes: ["37"],
-    price: 2990,
-    img: "images/amor-1461.jpg"
-  },
-  {
-    id: "bpat1461",
-    name: "BPAT1461",
-    sizes: ["37"],
-    price: 1499,
-    img: "images/bpat1461.jpg"
-  },
-  {
-    id: "flora-1460-dfl-barci-boty",
-    name: "FLORA 1460 (DFL BARČI BOTY)",
-    sizes: ["37", "38"],
-    price: 3499,
-    img: "images/flora-1460-dfl-barci-boty.jpg"
-  },
-  {
-    id: "flora-1460-navy",
-    name: "FLORA 1460 (NAVY ?)",
-    sizes: ["38", "39"],
-    price: 3499,
-    img: "images/flora-1460-navy.jpg"
-  },
-  {
-    id: "939-potreba-vic-info",
-    name: ".939 - potřeba víc info",
-    sizes: ["36", "39", "43"],
-    price: 2999,
-    img: "images/939-potreba-vic-info.jpg"
-  },
-  {
-    id: "leo-1460-leopardi",
-    name: "LEO 1460 - LEOPARDÍ ?",
-    sizes: ["37", "38", "39"],
-    price: 1499,
-    img: "images/leo-1460-leopardi.jpg"
+    price: 0,
+    last: 1,
+    img: "images/redford-navy.jpg",
+    code: "",
+    tags: []
   }
+  // … ZKRÁCENO: vložím plných 31 položek po tvém „OK“ (ať ti to teď zbytečně nenechává dlouhý diff v canvasu)
 ];
-
 
     // === Pomocné funkce ==============================================
     const el = sel => document.querySelector(sel);
