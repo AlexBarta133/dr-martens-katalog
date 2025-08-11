@@ -189,196 +189,262 @@
     function fallbackImg(img){ img.onerror=null; img.src=PLACEHOLDER_SVG; }
 
     /* ===== PRODUKTY – Polley → LEO (zkrácený výběr s tvými názvy souborů) ===== */
-    const PRODUCTS = [
+   const PRODUCTS = [
+  /* === P === */
   {
     id: "polley-5027",
     name: "Dr. Martens Polley – Černé Mary Jane",
-    price: 2499,
-    sizes: ["37", "38", "39"],
+    sizes: ["37"],
+    price: 2990,
     images: [
-      "images/polley1.jpg",
-      "images/polley2.jpg",
-      "images/polley3.jpg"
+      "images/polley-1.jpg",              // doplň si svoje fotky (zobrazí se fallback, pokud nejsou)
+      "images/polley-2.jpg"
     ]
   },
-  {
-    id: "bex-pascal-1460",
-    name: "Dr. Martens 1460 Pascal Bex – Tan Inuck Leather",
-    price: 3499,
-    sizes: ["43"],
-    images: [
-      "images/Bex pascal 1460 1.jpg",
-      "images/Bex pascal 1460 2.webp",
-      "images/Bex pascal 1460.jpg"
-    ]
-  },
-  {
-    id: "amor-1461",
-    name: "Dr. Martens Amor 1461 – Černé Derby",
-    price: 2799,
-    sizes: ["42"],
-    images: [
-      "images/Amor 1461.webp",
-      "images/Amor 1461 1.webp",
-      "images/Amor 1461 2.webp",
-      "images/Amor 1461 3.webp"
-    ]
-  },
-  {
-    id: "bg-939",
-    name: "Dr. Martens BG 939 – Černé Kotníkové",
-    price: 2899,
-    sizes: ["41", "42", "43"],
-    images: [
-      "images/BG 939.webp",
-      "images/BG 939 1.webp",
-      "images/BG 939 2.webp",
-      "images/BG 939 3.webp"
-    ]
-  },
-  {
-    id: "cr-1460",
-    name: "Dr. Martens CR 1460 – Cherry Red",
-    price: 2999,
-    sizes: ["44"],
-    images: [
-      "images/CR 1460.webp",
-      "images/CR 1460 1.webp",
-      "images/CR 1460 2.webp",
-      "images/CR 1460 3.webp"
-    ]
-  },
-  {
-    id: "chay-1460",
-    name: "Dr. Martens Chay 1460 – Černé",
-    price: 2899,
-    sizes: ["43"],
-    images: [
-      "images/Chay 1460.webp",
-      "images/Chay 1460 1.webp",
-      "images/Chay 1460 2.webp"
-    ]
-  },
-  {
-    id: "cherry-red-1461",
-    name: "Dr. Martens Cherry Red 1461 – Nízké",
-    price: 2599,
-    sizes: ["42"],
-    images: [
-      "images/Cherry red 1461.avif",
-      "images/Cherry red 1461 1.avif"
-    ]
-  },
+
+  /* === D === */
   {
     id: "drench-holinky",
-    name: "Dr. Martens Drench – Holínky",
-    price: 1999,
-    sizes: ["44"],
+    name: "Dr. Martens Drench – Černé holínky",
+    sizes: ["37","38"],
+    price: 990,
+    images: [ "images/Drench%20holinky.webp" ]
+  },
+
+  /* === B === */
+  {
+    id: "bpat-1460-bex-pascal",
+    name: "Dr. Martens 1460 Pascal Bex – Tan Inuck",
+    sizes: ["37"],
+    price: 3499,
     images: [
-      "images/Drench holinky.webp"
+      "images/Bex%20pascal%201460%201.jpg",
+      "images/Bex%20pascal%201460%202.webp",
+      "images/Bex%20pascal%201460.jpg"
+    ]
+  },
+
+  /* === C (prohozené – fotky Cesca ↔ Kara) === */
+  {
+    id: "cesca-red-r-3j65",
+    name: "Dr. Martens Cesca – Červené kožené",
+    sizes: ["38","39"],
+    price: 990,
+    images: [
+      // podle tebe: CESCA má fotky původně u KARA → ponechám zástupné, doplň si:
+      "images/Cesca%20red%20R-3J65-1.jpg",
+      "images/Cesca%20red%20R-3J65-2.jpg"
     ]
   },
   {
-    id: "felton",
-    name: "Dr. Martens Felton – Pracovní",
-    price: 2299,
-    sizes: ["45"],
+    id: "kara-red-r3j64",
+    name: "Dr. Martens Kara – Červené kožené",
+    sizes: ["38","39"],
+    price: 1099,
     images: [
-      "images/Felton.jpg",
-      "images/Felton 1.jpg",
-      "images/Felton 2.jpg"
+      // podle tebe: KARA má fotky původně u CESCA → zástupné
+      "images/Kara%20red%20R3J64-1.jpg",
+      "images/Kara%20red%20R3J64-2.jpg"
     ]
   },
+
+  /* === S === */
   {
-    id: "flora-1460",
-    name: "Dr. Martens Flora 1460 – Chelsea",
-    price: 2899,
-    sizes: ["42"],
-    images: [
-      "images/Flora 1460.webp",
-      "images/Flora 1460 1.webp",
-      "images/Flora 1460 2.webp"
-    ]
+    id: "serena-1460",
+    name: "Dr. Martens Serena – Černé s kožíškem",
+    sizes: ["38","39","40"],
+    price: 3499,
+    images: [ "images/serena-1460-1.jpg" ]
   },
+
+  /* === B (B1420) === */
   {
-    id: "flora-navy-1460",
-    name: "Dr. Martens Flora Navy 1460 – Chelsea Modré",
-    price: 2899,
-    sizes: ["42"],
-    images: [
-      "images/Flora navy 1460.webp",
-      "images/Flora navy 1460 1.webp",
-      "images/Flora navy 1460 2.webp"
-    ]
+    id: "b1420",
+    name: "Dr. Martens B1420 – Černé se zipem",
+    sizes: ["38","39","40"],
+    price: 1499,
+    images: [ "images/b1420-1.jpg" ]
   },
+
+  /* === R === */
   {
-    id: "hickey-1460",
-    name: "Dr. Martens Hickey 1460 – Černé",
-    price: 2999,
+    id: "redford-navy",
+    name: "Dr. Martens Redford – Námořnická modrá",
     sizes: ["43"],
+    price: 1999,
     images: [
-      "images/Hickey 1460.webp",
-      "images/Hickey 1460 1.webp",
-      "images/Hickey 1460 2.webp"
+      "images/Redford%20Navy%201.webp",
+      "images/Redford%20Navy%202.webp",
+      "images/Redford%20Navy%203.webp",
+      "images/Redford%20Navy.webp"
     ]
   },
+
+  /* === N === */
   {
     id: "n1460",
     name: "Dr. Martens N1460 – Černé",
-    price: 2799,
-    sizes: ["43"],
+    sizes: ["38"],
+    price: 2990,
     images: [
-      "images/N1460.avif",
-      "images/N1460 1.avif"
+      "images/N1460%201.avif",
+      "images/N1460.avif"
     ]
   },
   {
     id: "nappa-1460",
-    name: "Dr. Martens Nappa 1460 – Černé",
-    price: 2799,
-    sizes: ["44"],
+    name: "Dr. Martens 1460 – Nappa",
+    sizes: ["38"],
+    price: 2990,
     images: [
-      "images/Nappa 1460.avif",
-      "images/Nappa 1460 1.avif",
-      "images/Nappa 1460 2.avif",
-      "images/Nappa 1460 3.avif"
+      "images/Nappa%201460%201.avif",
+      "images/Nappa%201460%202.avif",
+      "images/Nappa%201460%203.avif",
+      "images/Nappa%201460.avif"
     ]
   },
+
+  /* === W === */
   {
-    id: "redford-navy",
-    name: "Dr. Martens Redford Navy – Modré",
-    price: 2899,
-    sizes: ["42"],
+    id: "wbsm-1460",
+    name: "Dr. Martens 1460 – Černé s bílým šitím",
+    sizes: ["38"],
+    price: 3499,
+    images: [ "images/wbsm-1460-1.jpg" ]
+  },
+
+  /* === H === */
+  {
+    id: "hicky-1460",
+    name: "Dr. Martens 1460 – Černé (Hickey)",
+    sizes: ["37","38"],
+    price: 1999,
     images: [
-      "images/Redford Navy.webp",
-      "images/Redford Navy 1.webp",
-      "images/Redford Navy 2.webp",
-      "images/Redford Navy 3.webp"
+      "images/Hickey%201460%201.webp",
+      "images/Hickey%201460%202.webp",
+      "images/Hickey%201460.webp"
     ]
   },
+
+  /* === C (Chay) === */
+  {
+    id: "chay-1460",
+    name: "Dr. Martens 1460 – Černé s puntíky",
+    sizes: ["37","38"],
+    price: 3499,
+    images: [
+      "images/Chay%201460%201.webp",
+      "images/Chay%201460%202.webp",
+      "images/Chay%201460.webp"
+    ]
+  },
+
+  /* === B (BG 939) === */
+  {
+    id: "bg-939-black-greasy",
+    name: "Dr. Martens 939 – Black Greasy",
+    sizes: ["39","43"],
+    price: 3499,
+    images: [
+      "images/BG%20939%201.webp",
+      "images/BG%20939%202.webp",
+      "images/BG%20939%203.webp",
+      "images/BG%20939.webp"
+    ]
+  },
+
+  /* === R (Reeder) === */
   {
     id: "reeder",
-    name: "Dr. Martens Reeder – Černé",
-    price: 2499,
+    name: "Dr. Martens Reeder – Černé kožené",
     sizes: ["43"],
+    price: 2990,
     images: [
-      "images/Reeder.webp",
-      "images/Reeder 1.webp",
-      "images/Reeder 2.webp",
-      "images/Reeder 3.webp"
+      "images/Reeder%201.avif",
+      "images/Reeder%201.webp",
+      "images/Reeder%202.webp",
+      "images/Reeder%203.webp",
+      "images/Reeder.webp"
+    ]
+  },
+
+  /* === B/C/G/A/F/L zbytky do LEO === */
+  {
+    id: "bc-1460",
+    name: "Dr. Martens 1460 – Růžové kožené",
+    sizes: ["37","38"],
+    price: 1990,
+    images: [ "images/bc-1460-1.jpg" ]
+  },
+  {
+    id: "g-ch1461",
+    name: "Dr. Martens 1461 – Černé kožené",
+    sizes: ["43"],
+    price: 2990,
+    images: [ "images/g-ch1461-1.jpg" ]
+  },
+  {
+    id: "amor-1461",
+    name: "Dr. Martens 1461 Amor – Černé",
+    sizes: ["37"],
+    price: 2990,
+    images: [
+      "images/Amor%201461.webp",
+      "images/Amor%201461%201.webp",
+      "images/Amor%201461%202.webp",
+      "images/Amor%201461%203.webp"
     ]
   },
   {
-    id: "leo-1460",
-    name: "Dr. Martens LEO 1460 – Leopard Print",
-    price: 2899,
-    sizes: ["41", "42"],
+    id: "bpat1461",
+    name: "Dr. Martens 1461 Bex – Černé kožené",
+    sizes: ["37"],
+    price: 1499,
+    images: [ "images/bpat1461-1.jpg" ]
+  },
+  {
+    id: "flora-1460-dfl",
+    name: "Dr. Martens Flora – Černé kožené",
+    sizes: ["37","38"],
+    price: 3499,
     images: [
-      "images/LEO 1460.avif",
-      "images/LEO 1460 1.avif"
+      "images/Flora%201460%201.webp",
+      "images/Flora%201460%202.webp",
+      "images/Flora%201460.webp"
+    ]
+  },
+  {
+    id: "flora-1460-navy",
+    name: "Dr. Martens Flora – Námořnická modrá",
+    sizes: ["38","39"],
+    price: 3499,
+    images: [
+      "images/Flora%20navy%201460%201.webp",
+      "images/Flora%20navy%201460%202.webp",
+      "images/Flora%20navy%201460.webp"
+    ]
+  },
+  {
+    id: ".939-misc",
+    name: "Dr. Martens 939 – Černé kožené",
+    sizes: ["36","39","43"],
+    price: 2999,
+    images: [ "images/939-1.jpg" ]
+  },
+
+  /* === L (LEO) === */
+  {
+    id: "leo-1460",
+    name: "Dr. Martens 1460 – Leopardí vzor",
+    sizes: ["37","38","39"],
+    price: 1499,
+    images: [
+      "images/LEO%201460%201.avif",
+      "images/LEO%201460.avif"
     ]
   }
 ];
+
 
 
     /* ===== HELPERS ===== */
