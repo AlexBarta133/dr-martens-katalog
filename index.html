@@ -73,8 +73,21 @@
     dialog{width:min(880px,92vw);border:none;border-radius:20px;background:#0f0f12;color:var(--text);box-shadow:var(--shadow)}
     dialog::backdrop{background:rgba(0,0,0,.6)}
     .modal{display:grid;grid-template-columns:1fr 1fr}
-    .modal .left{padding:0;background:#0a0a0c;position:relative}
-    .modal .left img{width:100%;height:100%;object-fit:cover}
+    /* box pro fotku – max 72% výšky okna */
+.modal .left{
+  padding:0;background:#0a0a0c;position:relative;
+  max-height:72vh;   /* důležité */
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* fotka se zmenší tak, aby se celá vešla */
+.modal .left img{
+  max-width:100%;
+  max-height:72vh;
+  width:auto;height:auto;
+  object-fit:contain;   /* místo cover */
+}
+
     .modal .right{padding:18px}
     .modal h3{margin:0 0 6px 0}
     .modal .muted{color:#b9b9c0}
@@ -176,17 +189,197 @@
     function fallbackImg(img){ img.onerror=null; img.src=PLACEHOLDER_SVG; }
 
     /* ===== PRODUKTY – Polley → LEO (zkrácený výběr s tvými názvy souborů) ===== */
-    const PRODUCTS = [
-      { id:"polley-5027", name:"Dr. Martens Polley – Černé Mary Jane", sizes:["37"], price:2990, imgs:["images/REPLACE-polley-1.jpg","images/REPLACE-polley-2.jpg"] },
-      { id:"drench-holinky", name:"Dr. Martens Drench – Černé holínky", sizes:["37","38"], price:990, imgs:["images/Drench holinky.webp"] },
-      { id:"bpat-1460-bex-pascal", name:"Dr. Martens 1460 Pascal Bex – Tan Inuck", sizes:["37"], price:3499, imgs:["images/Bex pascal 1460 1.jpg","images/Bex pascal 1460 2.webp","images/Bex pascal 1460.jpg"] },
-      { id:"bg-939-black-greasy", name:"Dr. Martens 939 – Black Greasy", sizes:["39","43"], price:3499, imgs:["images/BG 939 1.webp","images/BG 939 2.webp","images/BG 939 3.webp","images/BG 939.webp"] },
-      { id:"reeder", name:"Dr. Martens Reeder – Černé kožené", sizes:["43"], price:2990, imgs:["images/Reeder 1.avif","images/Reeder 1.webp","images/Reeder 2.webp","images/Reeder 3.webp","images/Reeder.webp"] },
-      { id:"amor-1461", name:"Dr. Martens 1461 Amor – Černé", sizes:["37"], price:2990, imgs:["images/Amor 1461.webp","images/Amor 1461 2.webp","images/Amor 1461 3.webp","images/Amor-1461-1.webp"] },
-      { id:"flora-1460-dfl", name:"Dr. Martens Flora – Černé kožené", sizes:["37","38"], price:3499, imgs:["images/Flora 1460 1.webp","images/Flora 1460 2.webp","images/Flora 1460.webp"] },
-      { id:"flora-1460-navy", name:"Dr. Martens Flora – Námořnická modrá", sizes:["38","39"], price:3499, imgs:["images/Flora navy 1460 1.webp","images/Flora navy 1460 2.webp","images/Flora navy 1460.webp"] },
-      { id:"leo-1460", name:"Dr. Martens 1460 – Leopardí vzor", sizes:["37","38","39"], price:1499, imgs:["images/LEO 1460 1.avif","images/LEO 1460.avif"] }
-    ];
+    const products = [
+  {
+    id: "polley-5027",
+    name: "Dr. Martens Polley – Černé Mary Jane",
+    price: 2499,
+    sizes: ["37", "38", "39"],
+    images: [
+      "images/polley1.jpg",
+      "images/polley2.jpg",
+      "images/polley3.jpg"
+    ]
+  },
+  {
+    id: "bex-pascal-1460",
+    name: "Dr. Martens 1460 Pascal Bex – Tan Inuck Leather",
+    price: 3499,
+    sizes: ["43"],
+    images: [
+      "images/Bex pascal 1460 1.jpg",
+      "images/Bex pascal 1460 2.webp",
+      "images/Bex pascal 1460.jpg"
+    ]
+  },
+  {
+    id: "amor-1461",
+    name: "Dr. Martens Amor 1461 – Černé Derby",
+    price: 2799,
+    sizes: ["42"],
+    images: [
+      "images/Amor 1461.webp",
+      "images/Amor 1461 1.webp",
+      "images/Amor 1461 2.webp",
+      "images/Amor 1461 3.webp"
+    ]
+  },
+  {
+    id: "bg-939",
+    name: "Dr. Martens BG 939 – Černé Kotníkové",
+    price: 2899,
+    sizes: ["41", "42", "43"],
+    images: [
+      "images/BG 939.webp",
+      "images/BG 939 1.webp",
+      "images/BG 939 2.webp",
+      "images/BG 939 3.webp"
+    ]
+  },
+  {
+    id: "cr-1460",
+    name: "Dr. Martens CR 1460 – Cherry Red",
+    price: 2999,
+    sizes: ["44"],
+    images: [
+      "images/CR 1460.webp",
+      "images/CR 1460 1.webp",
+      "images/CR 1460 2.webp",
+      "images/CR 1460 3.webp"
+    ]
+  },
+  {
+    id: "chay-1460",
+    name: "Dr. Martens Chay 1460 – Černé",
+    price: 2899,
+    sizes: ["43"],
+    images: [
+      "images/Chay 1460.webp",
+      "images/Chay 1460 1.webp",
+      "images/Chay 1460 2.webp"
+    ]
+  },
+  {
+    id: "cherry-red-1461",
+    name: "Dr. Martens Cherry Red 1461 – Nízké",
+    price: 2599,
+    sizes: ["42"],
+    images: [
+      "images/Cherry red 1461.avif",
+      "images/Cherry red 1461 1.avif"
+    ]
+  },
+  {
+    id: "drench-holinky",
+    name: "Dr. Martens Drench – Holínky",
+    price: 1999,
+    sizes: ["44"],
+    images: [
+      "images/Drench holinky.webp"
+    ]
+  },
+  {
+    id: "felton",
+    name: "Dr. Martens Felton – Pracovní",
+    price: 2299,
+    sizes: ["45"],
+    images: [
+      "images/Felton.jpg",
+      "images/Felton 1.jpg",
+      "images/Felton 2.jpg"
+    ]
+  },
+  {
+    id: "flora-1460",
+    name: "Dr. Martens Flora 1460 – Chelsea",
+    price: 2899,
+    sizes: ["42"],
+    images: [
+      "images/Flora 1460.webp",
+      "images/Flora 1460 1.webp",
+      "images/Flora 1460 2.webp"
+    ]
+  },
+  {
+    id: "flora-navy-1460",
+    name: "Dr. Martens Flora Navy 1460 – Chelsea Modré",
+    price: 2899,
+    sizes: ["42"],
+    images: [
+      "images/Flora navy 1460.webp",
+      "images/Flora navy 1460 1.webp",
+      "images/Flora navy 1460 2.webp"
+    ]
+  },
+  {
+    id: "hickey-1460",
+    name: "Dr. Martens Hickey 1460 – Černé",
+    price: 2999,
+    sizes: ["43"],
+    images: [
+      "images/Hickey 1460.webp",
+      "images/Hickey 1460 1.webp",
+      "images/Hickey 1460 2.webp"
+    ]
+  },
+  {
+    id: "n1460",
+    name: "Dr. Martens N1460 – Černé",
+    price: 2799,
+    sizes: ["43"],
+    images: [
+      "images/N1460.avif",
+      "images/N1460 1.avif"
+    ]
+  },
+  {
+    id: "nappa-1460",
+    name: "Dr. Martens Nappa 1460 – Černé",
+    price: 2799,
+    sizes: ["44"],
+    images: [
+      "images/Nappa 1460.avif",
+      "images/Nappa 1460 1.avif",
+      "images/Nappa 1460 2.avif",
+      "images/Nappa 1460 3.avif"
+    ]
+  },
+  {
+    id: "redford-navy",
+    name: "Dr. Martens Redford Navy – Modré",
+    price: 2899,
+    sizes: ["42"],
+    images: [
+      "images/Redford Navy.webp",
+      "images/Redford Navy 1.webp",
+      "images/Redford Navy 2.webp",
+      "images/Redford Navy 3.webp"
+    ]
+  },
+  {
+    id: "reeder",
+    name: "Dr. Martens Reeder – Černé",
+    price: 2499,
+    sizes: ["43"],
+    images: [
+      "images/Reeder.webp",
+      "images/Reeder 1.webp",
+      "images/Reeder 2.webp",
+      "images/Reeder 3.webp"
+    ]
+  },
+  {
+    id: "leo-1460",
+    name: "Dr. Martens LEO 1460 – Leopard Print",
+    price: 2899,
+    sizes: ["41", "42"],
+    images: [
+      "images/LEO 1460.avif",
+      "images/LEO 1460 1.avif"
+    ]
+  }
+];
+
 
     /* ===== HELPERS ===== */
     const el = s => document.querySelector(s);
