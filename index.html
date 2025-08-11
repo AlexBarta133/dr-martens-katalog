@@ -59,7 +59,7 @@
     .brand small{color:var(--muted)}
 
     /* Controls */
-    .controls{display:grid;grid-template-columns: 1fr 140px 140px 160px;gap:10px;margin-top:12px}
+    .controls{display:grid;grid-template-columns: 1fr 140px 160px;gap:10px;margin-top:12px}
     .input, select, button{background:#1a1a1f;border:1px solid #26262b;color:var(--text);border-radius:12px;padding:12px 14px;font-size:14px;}
     .input:focus, select:focus{outline:2px solid #2a2a33;border-color:#2a2a33}
     .cta{background:var(--brand);color:#111;font-weight:700;border:none;cursor:pointer}
@@ -131,12 +131,7 @@
         <select id="size" aria-label="Velikost">
           <option value="">Velikost (EU)</option>
         </select>
-        <select id="sort" aria-label="Řazení">
-          <option value="new">Nejnovější</option>
-          <option value="price_asc">Cena ↑</option>
-          <option value="price_desc">Cena ↓</option>
-        </select>
-        <button class="cta" id="whatsappAll" title="Otevřít WhatsApp chat">Napsat na WhatsApp</button>
+        <button class="cta" id="contactAll" title="Kontaktovat">Kontaktovat</button>
       </div>
       <div class="hero">
         <p>Vyprodáváme sklad ≤ poslední kusy. Pokud chceš jinou velikost, napiš – zkusíme dohledat.
@@ -174,7 +169,8 @@
         <div class="muted" id="dcode"></div>
         <div class="opt">
           <select id="dsize"></select>
-          <a class="btn whatsapp" id="dwhats" target="_blank" rel="nofollow noopener">Napsat na WhatsApp</a>
+          <a class=\"btn\" id=\"dmail\" target=\"_blank\" rel=\"nofollow noopener\">E‑mail<\/a>
+          <a class=\"btn whatsapp\" id=\"dwhats\" target=\"_blank\" rel=\"nofollow noopener\">WhatsApp<\/a>
         </div>
         <div style="color:#bdbdc6;font-size:14px">Domluvíme dopravu: osobně / zásilkovna / dobírka. Napiš, co ti sedne.</div>
       </div>
@@ -186,7 +182,7 @@
     const STORE = {
       name: "Poslední páry Dr. Martens",
       phone: "+420123456789",     // ← nahraď vlastním číslem pro WhatsApp i tel:
-      email: "info@example.com",   // ← e‑mail pro mailto:
+      email: "alexandr.barta1@gmail.com",   // ← e‑mail pro mailto:
       whatsappGreeting: "Ahoj, mám zájem o tyto boty:",
       city: "Praha",
     };
@@ -196,349 +192,44 @@
     // price: aktuální cena v Kč, was: původní cena (nepovinné)
     // last: kolik párů – 1 zobrazí BADGE Poslední kus
     // code: tvůj vnitřní kód (bude v předvyplněné zprávě)
-   const PRODUCTS = [
-  {
-    id: "polley-5027",
-    name: "POLLEY 5027",
-    color: "",
-    sizes: ["37"],
-    price: 0,
-    last: 1,
-    img: "images/polley-5027.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "drench-holinky",
-    name: "DRENCH holinky",
-    color: "",
-    sizes: ["37", "38"],
-    price: 0,
-    last: 2,
-    img: "images/drench-holinky.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "bbex--/-tan-bex-1460",
-    name: "BBEX  / TAN BEX 1460",
-    color: "",
-    sizes: ["43"],
-    price: 0,
-    last: 1,
-    img: "images/bbex--/-tan-bex-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "cesca-red-(r-3j65)",
-    name: "CESCA RED (R-3J65)",
-    color: "",
-    sizes: ["38", "39"],
-    price: 0,
-    last: 28,
-    img: "images/cesca-red-(r-3j65).jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "kara-red-(r3j64)---zeptat-se",
-    name: "KARA RED (R3J64) - ZEPTAT SE",
-    color: "",
-    sizes: ["38", "39"],
-    price: 0,
-    last: 9,
-    img: "images/kara-red-(r3j64)---zeptat-se.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "serena-1460",
-    name: "SERENA 1460",
-    color: "",
-    sizes: ["38", "39", "40"],
-    price: 0,
-    last: 7,
-    img: "images/serena-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "b1420",
-    name: "B1420",
-    color: "",
-    sizes: ["38", "39", "40"],
-    price: 0,
-    last: 45,
-    img: "images/b1420.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "redford-navy",
-    name: "REDFORD NAVY",
-    color: "",
-    sizes: ["43"],
-    price: 0,
-    last: 3,
-    img: "images/redford-navy.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "n1460",
-    name: "N1460",
-    color: "",
-    sizes: ["38"],
-    price: 0,
-    last: 1,
-    img: "images/n1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "bpat-1460",
-    name: "BPAT 1460",
-    color: "",
-    sizes: ["37"],
-    price: 0,
-    last: 1,
-    img: "images/bpat-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "wbsm-1460",
-    name: "WBSM 1460",
-    color: "",
-    sizes: ["38"],
-    price: 0,
-    last: 2,
-    img: "images/wbsm-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "hicky-1460",
-    name: "HICKY 1460",
-    color: "",
-    sizes: ["37", "38"],
-    price: 0,
-    last: 9,
-    img: "images/hicky-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "chay-1460",
-    name: "CHAY 1460",
-    color: "",
-    sizes: ["37", "38"],
-    price: 0,
-    last: 14,
-    img: "images/chay-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "bg-939",
-    name: "BG 939",
-    color: "",
-    sizes: ["39", "43"],
-    price: 0,
-    last: 17,
-    img: "images/bg-939.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "reeder",
-    name: "REEDER",
-    color: "",
-    sizes: ["43"],
-    price: 0,
-    last: 7,
-    img: "images/reeder.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "bc-1460",
-    name: "BC 1460",
-    color: "",
-    sizes: ["37", "38"],
-    price: 0,
-    last: 9,
-    img: "images/bc-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "g-ch1461",
-    name: "G-CH1461",
-    color: "",
-    sizes: ["43"],
-    price: 0,
-    last: 1,
-    img: "images/g-ch1461.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "amor-1461",
-    name: "AMOR 1461",
-    color: "",
-    sizes: ["37"],
-    price: 0,
-    last: 1,
-    img: "images/amor-1461.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "bpat1461",
-    name: "BPAT1461",
-    color: "",
-    sizes: ["37"],
-    price: 0,
-    last: 1,
-    img: "images/bpat1461.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "flora-1460-(dfl-barči-boty)",
-    name: "FLORA 1460 (DFL BARČI BOTY)",
-    color: "",
-    sizes: ["37", "38"],
-    price: 0,
-    last: 6,
-    img: "images/flora-1460-(dfl-barči-boty).jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "flora-1460-(navy-?)",
-    name: "FLORA 1460 (NAVY ?)",
-    color: "",
-    sizes: ["38", "39"],
-    price: 0,
-    last: 30,
-    img: "images/flora-1460-(navy-?).jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: ".939",
-    name: ".939",
-    color: "",
-    sizes: ["36", "39", "43"],
-    price: 0,
-    last: 45,
-    img: "images/.939.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "leo-1460",
-    name: "LEO 1460",
-    color: "",
-    sizes: ["37", "38", "39"],
-    price: 0,
-    last: 47,
-    img: "images/leo-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "marine",
-    name: "MARINE",
-    color: "",
-    sizes: ["38", "39"],
-    price: 0,
-    last: 30,
-    img: "images/marine.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "briane-(-jsou-menší-než-je-velikost-)",
-    name: "BRIANE ( jsou menší než je velikost )",
-    color: "",
-    sizes: ["36", "37", "38"],
-    price: 0,
-    last: 45,
-    img: "images/briane-(-jsou-menší-než-je-velikost-).jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "b6-1460",
-    name: "B6 1460",
-    color: "",
-    sizes: ["38"],
-    price: 0,
-    last: 3,
-    img: "images/b6-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "b-1925",
-    name: "B 1925",
-    color: "",
-    sizes: ["43"],
-    price: 0,
-    last: 2,
-    img: "images/b-1925.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "a-ch-1460",
-    name: "A-CH 1460",
-    color: "",
-    sizes: ["37", "38", "39", "43"],
-    price: 0,
-    last: 18,
-    img: "images/a-ch-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "wros-1460",
-    name: "WROS 1460",
-    color: "",
-    sizes: ["36"],
-    price: 0,
-    last: 1,
-    img: "images/wros-1460.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "cr-1490",
-    name: "CR 1490",
-    color: "",
-    sizes: ["37"],
-    price: 0,
-    last: 8,
-    img: "images/cr-1490.jpg",
-    code: "",
-    tags: []
-  },
-  {
-    id: "mariel",
-    name: "MARIEL",
-    color: "",
-    sizes: ["37", "38"],
-    price: 0,
-    last: 13,
-    img: "images/mariel.jpg",
-    code: "",
-    tags: []
-  }
-];
+    const PRODUCTS = [
+      {
+        id: "1460-black-smooth",
+        name: "1460 Smooth Black",
+        color: "Black",
+        sizes: ["41","42","43"],
+        price: 2990,
+        was: 4290,
+        last: 2,
+        img: "images/1460-black.jpg",
+        code: "DM-1460-BLK",
+        tags: ["Unisex","8‑ey"]
+      },
+      {
+        id: "2976-chelsea-black",
+        name: "2976 Chelsea",
+        color: "Black",
+        sizes: ["40","41"],
+        price: 3190,
+        was: 4490,
+        last: 1,
+        img: "images/2976-black.jpg",
+        code: "DM-2976-BLK",
+        tags: ["Chelsea","Classic"]
+      },
+      {
+        id: "jadon-platform",
+        name: "Jadon Platform",
+        color: "Black",
+        sizes: ["38","39"],
+        price: 3790,
+        was: 5490,
+        last: 1,
+        img: "images/jadon-black.jpg",
+        code: "DM-JADON-BLK",
+        tags: ["Platform","Zip"]
+      }
+    ];
 
     // === Pomocné funkce ==============================================
     const el = sel => document.querySelector(sel);
@@ -557,8 +248,12 @@
     el('#year').textContent = new Date().getFullYear();
 
     // WhatsApp All CTA
-    el('#whatsappAll').addEventListener('click', ()=>{
-      location.href = waLink(`${STORE.whatsappGreeting} (obecný dotaz)\nMěsto: ${STORE.city}`);
+    el('#contactAll').addEventListener('click', ()=>{
+      const subject = 'Dotaz – Dr. Martens katalog';
+      const body = `${STORE.whatsappGreeting} (obecný dotaz)
+Město: ${STORE.city}`;
+      location.href = `mailto:${STORE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
     });
 
     // Render grid
@@ -589,7 +284,7 @@
           </div>
           <div class="actions">
             <a class="btn" href="#" data-id="${p.id}">Detail</a>
-            <a class="btn whatsapp" target="_blank" rel="nofollow noopener" href="${waLink(`${STORE.whatsappGreeting}\n${p.name} (${p.color})\nKód: ${p.code}\nPreferovaná velikost: ${p.sizes[0]}\nMěsto: ${STORE.city}`)}">WhatsApp</a>
+            <a class=\"btn contact\" href=\"#\" data-id=\"${p.id}\">Kontaktovat<\/a>
           </div>
         `;
         // Detail action
@@ -605,9 +300,14 @@
     function applyFilters(){
       const q = el('#q').value.trim().toLowerCase();
       const size = el('#size').value;
-      const sort = el('#sort').value;
       let list = PRODUCTS.filter(p=>{
         const text = `${p.name} ${p.color} ${p.code} ${p.tags?.join(' ')}`.toLowerCase();
+        const okQ = !q || text.includes(q);
+        const okSize = !size || p.sizes.includes(size);
+        return okQ && okSize;
+      });
+      render(list);
+    } ${p.color} ${p.code} ${p.tags?.join(' ')}`.toLowerCase();
         const okQ = !q || text.includes(q);
         const okSize = !size || p.sizes.includes(size);
         return okQ && okSize;
@@ -617,7 +317,7 @@
       if(sort==='new') list.sort((a,b)=> (b.was?1:0) - (a.was?1:0)); // primitivně zvýhodni slevy/novinky
       render(list);
     }
-    ['#q','#size','#sort'].forEach(sel=> el(sel).addEventListener('input', applyFilters));
+    ['#q','#size'].forEach(sel=> el(sel).addEventListener('input', applyFilters));
 
     // Detail modal
     const detail = el('#detail');
@@ -632,9 +332,18 @@
       dsize.innerHTML = '';
       p.sizes.forEach(s=>{ const o=document.createElement('option'); o.value=s; o.textContent=`EU ${s}`; dsize.appendChild(o); });
       const linkBase = `${STORE.whatsappGreeting}\n${p.name} (${p.color})\nKód: ${p.code}\nVelikost: `;
-      const setWhats = ()=> el('#dwhats').href = waLink(linkBase + dsize.value + `\nMěsto: ${STORE.city}`);
-      dsize.addEventListener('change', setWhats);
-      setWhats();
+      const setContacts = ()=>{
+        const base = `${STORE.whatsappGreeting}
+${p.name} (${p.color})
+Kód: ${p.code}
+Velikost: ${dsize.value}
+Město: ${STORE.city}`;
+        el('#dwhats').href = waLink(base);
+        const subject = `Dotaz – ${p.name}`;
+        el('#dmail').href = `mailto:${STORE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(base)}`;
+      };
+      dsize.addEventListener('change', setContacts);
+      setContacts();
       detail.showModal();
     }
 
