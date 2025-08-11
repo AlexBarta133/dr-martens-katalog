@@ -81,7 +81,13 @@
     .modal .muted{color:#b9b9c0}
     .modal .opt{display:flex;gap:10px;margin:12px 0 16px}
     .opt select{flex:1}
-    .close{position:absolute;top:10px;right:10px;border:none;background:#1a1a1f;border:1px solid #2a2a2f;color:#ddd;border-radius:10px;padding:8px 10px;cursor:pointer}
+    .close{
+  position:absolute;top:10px;right:10px;
+  border:none;background:#1a1a1f;border:1px solid #2a2a2f;color:#ddd;
+  border-radius:12px; padding:0; width:44px; height:44px;
+  display:grid; place-items:center; font-size:20px; cursor:pointer; z-index:5;
+}
+
     .navbtn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid #2a2a2f;color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}
     .navbtn.prev{left:10px}
     .navbtn.next{right:10px}
@@ -136,7 +142,7 @@
 
   <!-- DETAIL -->
   <dialog id="detail">
-    <button class="close" onclick="detail.close()" aria-label="Zavřít">✕</button>
+    <button class="close" onclick="closeDlg()" aria-label="Zavřít">✕</button>
     <div class="modal">
       <div class="left">
         <img id="dimg" alt="Náhled produktu" loading="lazy">
@@ -334,6 +340,40 @@ Město: ${STORE.city}`;
 
     /* Modal + šipky */
     const detail = el('#detail');
+const detail = el('#detail');
+
+// 🔹 Helper funkce
+function openDlg(){ 
+  if (detail.showModal) detail.showModal(); 
+  else detail.setAttribute('open',''); 
+}
+function closeDlg(){ 
+  if (detail.close) detail.close(); 
+  else detail.removeAttribute('open'); 
+}
+
+// 🔹 Zavření klikem mimo obsah
+detail.addEventListener('click', (e) => {
+  if (e.target === detail) closeDlg();
+});
+
+// 🔹 Swipe-down na mobilu
+let touchStartY = null;
+detail.addEventListener('touchstart', (e) => { 
+  touchStartY = e.touches[0].clientY; 
+}, {passive:true});
+detail.addEventListener('touchmove',  (e) => {
+  if (touchStartY == null) return;
+  const dy = e.touches[0].clientY - touchStartY;
+  if (dy > 80) { 
+    closeDlg(); 
+    touchStartY = null; 
+  }
+}, {passive:true});
+detail.addEventListener('touchend', () => { 
+  touchStartY = null; 
+});
+
     let curImgs = [], curIdx = 0;
     function setMain(i){
       if(!curImgs.length){ el('#dimg').src=''; return; }
