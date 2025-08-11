@@ -11,7 +11,6 @@
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
     a{color:inherit}
 
-    /* Top bar */
     .topbar{
       position:sticky;top:0;z-index:40;
       background:linear-gradient(180deg, rgba(18,18,20,.96), rgba(18,18,20,.86));
@@ -34,20 +33,15 @@
     .cta{background:var(--brand);color:#111;font-weight:700;border:none;cursor:pointer}
     .cta:active{transform:translateY(1px)}
 
-    /* Hero */
     .hero{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 16px 8px}
     .hero p{margin:0;color:var(--muted)}
     .badges{display:flex;flex-wrap:wrap;gap:8px}
     .badge{padding:6px 10px;border-radius:999px;background:#1a1a1f;border:1px solid #26262b;color:#c9c9cf;font-size:12px}
     .badge.brand{background:var(--brand);color:#111;border:none;font-weight:800}
 
-    /* Grid + cards */
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:16px}
     .card{background:linear-gradient(180deg,#151518,#121214);border:1px solid #1c1c21;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
-    .media{
-      position:relative;background:#0f0f12;height:250px;
-      display:grid;place-items:center;overflow:hidden;cursor:pointer;
-    }
+    .media{position:relative;background:#0f0f12;height:250px;display:grid;place-items:center;overflow:hidden;cursor:pointer}
     .media::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .3s ease}
     .media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
     .media:hover img{transform:scale(1.05)}
@@ -65,29 +59,19 @@
     .actions{display:flex;gap:8px;margin-top:auto;padding:12px 14px;border-top:1px solid #1d1d22}
     .btn{flex:1;display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:11px 12px;border-radius:12px;border:1px solid #26262b;background:#1a1a1f;color:#f0f0f5;text-decoration:none;font-weight:700}
 
-    /* Footer */
     footer{padding:30px 16px;color:#bfbfc6;border-top:1px solid #1c1c22}
     footer a{color:#fff;text-decoration:underline dotted}
 
-    /* Modal */
     dialog{width:min(880px,92vw);border:none;border-radius:20px;background:#0f0f12;color:var(--text);box-shadow:var(--shadow)}
     dialog::backdrop{background:rgba(0,0,0,.6)}
     .modal{display:grid;grid-template-columns:1fr 1fr}
-    /* box pro fotku – max 72% výšky okna */
-.modal .left{
-  padding:0;background:#0a0a0c;position:relative;
-  max-height:72vh;   /* důležité */
-  display:flex;align-items:center;justify-content:center;
-}
-
-/* fotka se zmenší tak, aby se celá vešla */
-.modal .left img{
-  max-width:100%;
-  max-height:72vh;
-  width:auto;height:auto;
-  object-fit:contain;   /* místo cover */
-}
-
+    .modal .left{
+      padding:0;background:#0a0a0c;position:relative;
+      max-height:72vh;display:flex;align-items:center;justify-content:center;
+    }
+    .modal .left img{
+      max-width:100%;max-height:72vh;width:auto;height:auto;object-fit:contain;
+    }
     .modal .right{padding:18px}
     .modal h3{margin:0 0 6px 0}
     .modal .muted{color:#b9b9c0}
@@ -147,7 +131,6 @@
     <div style="margin-top:10px;color:#9a9aa2">© <span id="year"></span> Poslední páry Dr. Martens • Jednoduchý katalog, nákup až po domluvě</div>
   </footer>
 
-  <!-- DETAIL -->
   <dialog id="detail">
     <button class="close" onclick="closeDlg()" aria-label="Zavřít">✕</button>
     <div class="modal">
@@ -188,266 +171,55 @@
     const PLACEHOLDER_SVG = 'data:image/svg+xml,'+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450'><rect width='600' height='450' fill='#0a0a0c'/><text x='50%' y='52%' fill='#7a7a80' text-anchor='middle' font-size='24' font-family='Arial'>Foto bude doplněno</text></svg>");
     function fallbackImg(img){ img.onerror=null; img.src=PLACEHOLDER_SVG; }
 
-    /* ===== PRODUKTY – Polley → LEO (zkrácený výběr s tvými názvy souborů) ===== */
-   const PRODUCTS = [
-  /* === P === */
-  {
-    id: "polley-5027",
-    name: "Dr. Martens Polley – Černé Mary Jane",
-    sizes: ["37"],
-    price: 2990,
-    images: [
-      "images/polley-1.jpg",              // doplň si svoje fotky (zobrazí se fallback, pokud nejsou)
-      "images/polley-2.jpg"
-    ]
-  },
+    /* ===== PRODUKTY (Polley → LEO) ===== */
+    const PRODUCTS = [
+      /* … nechal jsem tvůj aktuální seznam z poslední zprávy … */
+      /* === P === */
+      { id:"polley-5027", name:"Dr. Martens Polley – Černé Mary Jane", sizes:["37"], price:2990, images:["images/polley-1.jpg","images/polley-2.jpg"] },
+      { id:"drench-holinky", name:"Dr. Martens Drench – Černé holínky", sizes:["37","38"], price:990, images:["images/Drench%20holinky.webp"] },
+      { id:"bpat-1460-bex-pascal", name:"Dr. Martens 1460 Pascal Bex – Tan Inuck", sizes:["37"], price:3499, images:["images/Bex%20pascal%201460%201.jpg","images/Bex%20pascal%201460%202.webp","images/Bex%20pascal%201460.jpg"] },
+      { id:"cesca-red-r-3j65", name:"Dr. Martens Cesca – Červené kožené", sizes:["38","39"], price:990, images:["images/Cesca%20red%20R-3J65-1.jpg","images/Cesca%20red%20R-3J65-2.jpg"] },
+      { id:"kara-red-r3j64", name:"Dr. Martens Kara – Červené kožené", sizes:["38","39"], price:1099, images:["images/Kara%20red%20R3J64-1.jpg","images/Kara%20red%20R3J64-2.jpg"] },
+      { id:"serena-1460", name:"Dr. Martens Serena – Černé s kožíškem", sizes:["38","39","40"], price:3499, images:["images/serena-1460-1.jpg"] },
+      { id:"b1420", name:"Dr. Martens B1420 – Černé se zipem", sizes:["38","39","40"], price:1499, images:["images/b1420-1.jpg"] },
+      { id:"redford-navy", name:"Dr. Martens Redford – Námořnická modrá", sizes:["43"], price:1999, images:["images/Redford%20Navy%201.webp","images/Redford%20Navy%202.webp","images/Redford%20Navy%203.webp","images/Redford%20Navy.webp"] },
+      { id:"n1460", name:"Dr. Martens N1460 – Černé", sizes:["38"], price:2990, images:["images/N1460%201.avif","images/N1460.avif"] },
+      { id:"nappa-1460", name:"Dr. Martens 1460 – Nappa", sizes:["38"], price:2990, images:["images/Nappa%201460%201.avif","images/Nappa%201460%202.avif","images/Nappa%201460%203.avif","images/Nappa%201460.avif"] },
+      { id:"wbsm-1460", name:"Dr. Martens 1460 – Černé s bílým šitím", sizes:["38"], price:3499, images:["images/wbsm-1460-1.jpg"] },
+      { id:"hicky-1460", name:"Dr. Martens 1460 – Černé (Hickey)", sizes:["37","38"], price:1999, images:["images/Hickey%201460%201.webp","images/Hickey%201460%202.webp","images/Hickey%201460.webp"] },
+      { id:"chay-1460", name:"Dr. Martens 1460 – Černé s puntíky", sizes:["37","38"], price:3499, images:["images/Chay%201460%201.webp","images/Chay%201460%202.webp","images/Chay%201460.webp"] },
+      { id:"bg-939-black-greasy", name:"Dr. Martens 939 – Black Greasy", sizes:["39","43"], price:3499, images:["images/BG%20939%201.webp","images/BG%20939%202.webp","images/BG%20939%203.webp","images/BG%20939.webp"] },
+      { id:"reeder", name:"Dr. Martens Reeder – Černé kožené", sizes:["43"], price:2990, images:["images/Reeder%201.avif","images/Reeder%201.webp","images/Reeder%202.webp","images/Reeder%203.webp","images/Reeder.webp"] },
+      { id:"bc-1460", name:"Dr. Martens 1460 – Růžové kožené", sizes:["37","38"], price:1990, images:["images/bc-1460-1.jpg"] },
+      { id:"g-ch1461", name:"Dr. Martens 1461 – Černé kožené", sizes:["43"], price:2990, images:["images/g-ch1461-1.jpg"] },
+      { id:"amor-1461", name:"Dr. Martens 1461 Amor – Černé", sizes:["37"], price:2990, images:["images/Amor%201461.webp","images/Amor%201461%201.webp","images/Amor%201461%202.webp","images/Amor%201461%203.webp"] },
+      { id:"bpat1461", name:"Dr. Martens 1461 Bex – Černé kožené", sizes:["37"], price:1499, images:["images/bpat1461-1.jpg"] },
+      { id:".939-misc", name:"Dr. Martens 939 – Černé kožené", sizes:["36","39","43"], price:2999, images:["images/939-1.jpg"] },
+      { id:"flora-1460-dfl", name:"Dr. Martens Flora – Černé kožené", sizes:["37","38"], price:3499, images:["images/Flora%201460%201.webp","images/Flora%201460%202.webp","images/Flora%201460.webp"] },
+      { id:"flora-1460-navy", name:"Dr. Martens Flora – Námořnická modrá", sizes:["38","39"], price:3499, images:["images/Flora%20navy%201460%201.webp","images/Flora%20navy%201460%202.webp","images/Flora%20navy%201460.webp"] },
+      { id:"leo-1460", name:"Dr. Martens 1460 – Leopardí vzor", sizes:["37","38","39"], price:1499, images:["images/LEO%201460%201.avif","images/LEO%201460.avif"] }
+    ];
 
-  /* === D === */
-  {
-    id: "drench-holinky",
-    name: "Dr. Martens Drench – Černé holínky",
-    sizes: ["37","38"],
-    price: 990,
-    images: [ "images/Drench%20holinky.webp" ]
-  },
+    /* ===== HELPERY PRO OBRÁZKY ===== */
+    function getPics(p){
+      const arr = (p && Array.isArray(p.imgs) && p.imgs.length) ? p.imgs
+               : (p && Array.isArray(p.images) && p.images.length) ? p.images
+               : [];
+      return arr.map(u => encodeURI(u));
+    }
+    function setBestImg(imgEl, pics){
+      if(!imgEl){return;}
+      if(!pics || !pics.length){ imgEl.src = PLACEHOLDER_SVG; return; }
+      let i = 0;
+      function tryNext(){
+        if(i >= pics.length){ imgEl.src = PLACEHOLDER_SVG; return; }
+        imgEl.onerror = ()=>{ i++; tryNext(); };
+        imgEl.src = pics[i];
+      }
+      tryNext();
+    }
 
-  /* === B === */
-  {
-    id: "bpat-1460-bex-pascal",
-    name: "Dr. Martens 1460 Pascal Bex – Tan Inuck",
-    sizes: ["37"],
-    price: 3499,
-    images: [
-      "images/Bex%20pascal%201460%201.jpg",
-      "images/Bex%20pascal%201460%202.webp",
-      "images/Bex%20pascal%201460.jpg"
-    ]
-  },
-
-  /* === C (prohozené – fotky Cesca ↔ Kara) === */
-  {
-    id: "cesca-red-r-3j65",
-    name: "Dr. Martens Cesca – Červené kožené",
-    sizes: ["38","39"],
-    price: 990,
-    images: [
-      // podle tebe: CESCA má fotky původně u KARA → ponechám zástupné, doplň si:
-      "images/Cesca%20red%20R-3J65-1.jpg",
-      "images/Cesca%20red%20R-3J65-2.jpg"
-    ]
-  },
-  {
-    id: "kara-red-r3j64",
-    name: "Dr. Martens Kara – Červené kožené",
-    sizes: ["38","39"],
-    price: 1099,
-    images: [
-      // podle tebe: KARA má fotky původně u CESCA → zástupné
-      "images/Kara%20red%20R3J64-1.jpg",
-      "images/Kara%20red%20R3J64-2.jpg"
-    ]
-  },
-
-  /* === S === */
-  {
-    id: "serena-1460",
-    name: "Dr. Martens Serena – Černé s kožíškem",
-    sizes: ["38","39","40"],
-    price: 3499,
-    images: [ "images/serena-1460-1.jpg" ]
-  },
-
-  /* === B (B1420) === */
-  {
-    id: "b1420",
-    name: "Dr. Martens B1420 – Černé se zipem",
-    sizes: ["38","39","40"],
-    price: 1499,
-    images: [ "images/b1420-1.jpg" ]
-  },
-
-  /* === R === */
-  {
-    id: "redford-navy",
-    name: "Dr. Martens Redford – Námořnická modrá",
-    sizes: ["43"],
-    price: 1999,
-    images: [
-      "images/Redford%20Navy%201.webp",
-      "images/Redford%20Navy%202.webp",
-      "images/Redford%20Navy%203.webp",
-      "images/Redford%20Navy.webp"
-    ]
-  },
-
-  /* === N === */
-  {
-    id: "n1460",
-    name: "Dr. Martens N1460 – Černé",
-    sizes: ["38"],
-    price: 2990,
-    images: [
-      "images/N1460%201.avif",
-      "images/N1460.avif"
-    ]
-  },
-  {
-    id: "nappa-1460",
-    name: "Dr. Martens 1460 – Nappa",
-    sizes: ["38"],
-    price: 2990,
-    images: [
-      "images/Nappa%201460%201.avif",
-      "images/Nappa%201460%202.avif",
-      "images/Nappa%201460%203.avif",
-      "images/Nappa%201460.avif"
-    ]
-  },
-
-  /* === W === */
-  {
-    id: "wbsm-1460",
-    name: "Dr. Martens 1460 – Černé s bílým šitím",
-    sizes: ["38"],
-    price: 3499,
-    images: [ "images/wbsm-1460-1.jpg" ]
-  },
-
-  /* === H === */
-  {
-    id: "hicky-1460",
-    name: "Dr. Martens 1460 – Černé (Hickey)",
-    sizes: ["37","38"],
-    price: 1999,
-    images: [
-      "images/Hickey%201460%201.webp",
-      "images/Hickey%201460%202.webp",
-      "images/Hickey%201460.webp"
-    ]
-  },
-
-  /* === C (Chay) === */
-  {
-    id: "chay-1460",
-    name: "Dr. Martens 1460 – Černé s puntíky",
-    sizes: ["37","38"],
-    price: 3499,
-    images: [
-      "images/Chay%201460%201.webp",
-      "images/Chay%201460%202.webp",
-      "images/Chay%201460.webp"
-    ]
-  },
-
-  /* === B (BG 939) === */
-  {
-    id: "bg-939-black-greasy",
-    name: "Dr. Martens 939 – Black Greasy",
-    sizes: ["39","43"],
-    price: 3499,
-    images: [
-      "images/BG%20939%201.webp",
-      "images/BG%20939%202.webp",
-      "images/BG%20939%203.webp",
-      "images/BG%20939.webp"
-    ]
-  },
-
-  /* === R (Reeder) === */
-  {
-    id: "reeder",
-    name: "Dr. Martens Reeder – Černé kožené",
-    sizes: ["43"],
-    price: 2990,
-    images: [
-      "images/Reeder%201.avif",
-      "images/Reeder%201.webp",
-      "images/Reeder%202.webp",
-      "images/Reeder%203.webp",
-      "images/Reeder.webp"
-    ]
-  },
-
-  /* === B/C/G/A/F/L zbytky do LEO === */
-  {
-    id: "bc-1460",
-    name: "Dr. Martens 1460 – Růžové kožené",
-    sizes: ["37","38"],
-    price: 1990,
-    images: [ "images/bc-1460-1.jpg" ]
-  },
-  {
-    id: "g-ch1461",
-    name: "Dr. Martens 1461 – Černé kožené",
-    sizes: ["43"],
-    price: 2990,
-    images: [ "images/g-ch1461-1.jpg" ]
-  },
-  {
-    id: "amor-1461",
-    name: "Dr. Martens 1461 Amor – Černé",
-    sizes: ["37"],
-    price: 2990,
-    images: [
-      "images/Amor%201461.webp",
-      "images/Amor%201461%201.webp",
-      "images/Amor%201461%202.webp",
-      "images/Amor%201461%203.webp"
-    ]
-  },
-  {
-    id: "bpat1461",
-    name: "Dr. Martens 1461 Bex – Černé kožené",
-    sizes: ["37"],
-    price: 1499,
-    images: [ "images/bpat1461-1.jpg" ]
-  },
-  {
-    id: "flora-1460-dfl",
-    name: "Dr. Martens Flora – Černé kožené",
-    sizes: ["37","38"],
-    price: 3499,
-    images: [
-      "images/Flora%201460%201.webp",
-      "images/Flora%201460%202.webp",
-      "images/Flora%201460.webp"
-    ]
-  },
-  {
-    id: "flora-1460-navy",
-    name: "Dr. Martens Flora – Námořnická modrá",
-    sizes: ["38","39"],
-    price: 3499,
-    images: [
-      "images/Flora%20navy%201460%201.webp",
-      "images/Flora%20navy%201460%202.webp",
-      "images/Flora%20navy%201460.webp"
-    ]
-  },
-  {
-    id: ".939-misc",
-    name: "Dr. Martens 939 – Černé kožené",
-    sizes: ["36","39","43"],
-    price: 2999,
-    images: [ "images/939-1.jpg" ]
-  },
-
-  /* === L (LEO) === */
-  {
-    id: "leo-1460",
-    name: "Dr. Martens 1460 – Leopardí vzor",
-    sizes: ["37","38","39"],
-    price: 1499,
-    images: [
-      "images/LEO%201460%201.avif",
-      "images/LEO%201460.avif"
-    ]
-  }
-];
-
-
-
-    /* ===== HELPERS ===== */
+    /* ===== OSTATNÍ HELPERS ===== */
     const el = s => document.querySelector(s);
     const money = n => new Intl.NumberFormat('cs-CZ',{style:'currency',currency:'CZK',maximumFractionDigits:0}).format(n);
     const waLink = text => `https://wa.me/${STORE.phone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
@@ -466,12 +238,11 @@
     /* Render grid */
     const grid = el('#grid');
     function cardHTML(p){
-      const firstImg = (p.imgs && p.imgs.length) ? p.imgs[0] : '';
       const sizesBadges = (p.sizes||[]).map(s=>`<span class="size">EU ${s}</span>`).join('');
       return `
         <article class="card">
           <div class="media" role="img" aria-label="${p.name}">
-            <img src="${firstImg}" alt="${p.name}" loading="lazy" onerror="fallbackImg(this)">
+            <img alt="${p.name}" loading="lazy">
             ${p.last<=1 ? '<div class="flag">Poslední kus</div>' : ''}
             <div class="sold">EU ${p.sizes.join(', ')}</div>
           </div>
@@ -493,6 +264,15 @@
         return;
       }
       grid.innerHTML = list.map(cardHTML).join('');
+
+      // doplnit obrázky do karet
+      Array.from(grid.children).forEach((card, i)=>{
+        const pics = getPics(list[i]);
+        const imgEl = card.querySelector('.media img');
+        setBestImg(imgEl, pics);
+      });
+
+      // akce
       grid.querySelectorAll('.detail,.contact,.media').forEach(a=>{
         a.addEventListener('click', e=>{
           e.preventDefault();
@@ -529,15 +309,13 @@ Město: ${STORE.city}`;
     el('#size').addEventListener('input', applyFilters);
 
     /* Modal + šipky + zavírání */
-    const detail = el('#detail');   // ← deklarace pouze jednou
+    const detail = el('#detail');
 
     function openDlg(){ if(detail.showModal) detail.showModal(); else detail.setAttribute('open',''); }
     function closeDlg(){ if(detail.close) detail.close(); else detail.removeAttribute('open'); }
 
-    // klik na backdrop zavře
     detail.addEventListener('click', (e)=>{ if(e.target===detail) closeDlg(); });
 
-    // swipe-down zavře
     let touchStartY=null;
     detail.addEventListener('touchstart',(e)=>{touchStartY=e.touches[0].clientY;},{passive:true});
     detail.addEventListener('touchmove',(e)=>{
@@ -553,8 +331,7 @@ Město: ${STORE.city}`;
       if(i<0) i=curImgs.length-1;
       if(i>=curImgs.length) i=0;
       curIdx=i;
-      el('#dimg').src=curImgs[i];
-      el('#dimg').onerror=()=>fallbackImg(el('#dimg'));
+      setBestImg(el('#dimg'), [curImgs[i]]); // použij helper (pro jistotu)
     }
     function openDetail(p){
       el('#dtitle').textContent=p.name;
@@ -566,7 +343,7 @@ Město: ${STORE.city}`;
       const dsize=el('#dsize'); dsize.innerHTML='';
       (p.sizes||[]).forEach(s=>{ const o=document.createElement('option'); o.value=s; o.textContent=`EU ${s}`; dsize.appendChild(o); });
 
-      curImgs=(p.imgs&&p.imgs.length)?p.imgs:[];
+      curImgs = getPics(p);
       setMain(0);
       el('#prevImg').onclick=()=>setMain(curIdx-1);
       el('#nextImg').onclick=()=>setMain(curIdx+1);
@@ -588,7 +365,7 @@ Město: ${STORE.city}`;
       openDlg();
     }
 
-    /* Auto-hide topbar na mobilu */
+    // Auto-hide topbar na mobilu
     (function(){
       const bar=document.querySelector('.topbar'); if(!bar) return;
       let lastY=window.scrollY||0;
