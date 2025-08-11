@@ -322,13 +322,12 @@
     el('#mailLink').href = `mailto:${STORE.email}`;
     el('#year').textContent = new Date().getFullYear();
 
-    // WhatsApp All CTA
-    el('#contactAll').addEventListener('click', ()=>{
-      const subject = 'Dotaz – Dr. Martens katalog';
-      const body = `${STORE.whatsappGreeting} (obecný dotaz)
-Město: ${STORE.city}`;
-      location.href = `mailto:${STORE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    });
+    // Kontaktovat (hlavní tlačítko v liště) — OTEVŘE WHATSAPP
+el('#contactAll').addEventListener('click', ()=>{
+  const body = `${STORE.whatsappGreeting} (obecný dotaz)\nMěsto: ${STORE.city}`;
+  location.href = waLink(body);
+});
+
 
     // Render grid
     const grid = el('#grid');
@@ -362,18 +361,17 @@ Město: ${STORE.city}`;
           </div>
         `;
         // Detail action
-        card.querySelector('.btn[data-id]')?.addEventListener('click', (e)=>{
-          e.preventDefault();
-          openDetail(p);
-        });
-        // Kontaktovat na kartě → otevře detail
-        card.querySelector('.contact')?.addEventListener('click', (e)=>{
-          e.preventDefault();
-          openDetail(p);
-        });
-        grid.appendChild(card);
-      }
-    }
+card.querySelector('.btn[data-id]')?.addEventListener('click', (e)=>{
+  e.preventDefault();
+  openDetail(p);
+});
+
+// Kontaktovat na kartě → otevře detail (kde si vyberou E-mail / WhatsApp)
+card.querySelector('.contact')?.addEventListener('click', (e)=>{
+  e.preventDefault();
+  openDetail(p);
+});
+
 
     // Filtrace (bez řazení)
     function applyFilters(){
