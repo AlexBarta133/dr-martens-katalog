@@ -1,16 +1,14 @@
 <!doctype html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dr. Martens – katalog | Poslední kusy</title>
-  <meta name="description" content="Katalog posledních párů Dr. Martens. Kontakt přes WhatsApp / Messenger – domluvíme doručení / dobírku / osobně."/>
-
+  <meta name="description" content="Katalog posledních párů Dr. Martens. Kontakt přes WhatsApp / Messenger – domluvíme doručení / dobírku / osobně." />
   <style>
     :root{ --bg:#0b0b0c; --panel:#121214; --muted:#7a7a80; --text:#eaeaf0; --brand:#ffd200; --brand-ink:#151515; --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35) }
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
     a{color:inherit}
-
     .topbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(18,18,20,.96), rgba(18,18,20,.86));backdrop-filter: blur(8px);border-bottom:1px solid #1e1e22}
     .container{max-width:1100px;margin:0 auto;padding:16px}
     .brand{display:flex;gap:12px;align-items:center}
@@ -22,13 +20,11 @@
     .input:focus,select:focus{outline:2px solid #2a2a33;border-color:#2a2a33}
     .cta{background:var(--brand);color:#111;font-weight:700;border:none;cursor:pointer}
     .cta:active{transform:translateY(1px)}
-
     .hero{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 16px 8px}
     .hero p{margin:0;color:var(--muted)}
     .badges{display:flex;flex-wrap:wrap;gap:8px}
     .badge{padding:6px 10px;border-radius:999px;background:#1a1a1f;border:1px solid #26262b;color:#c9c9cf;font-size:12px}
     .badge.brand{background:var(--brand);color:#111;border:none;font-weight:800}
-
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:16px}
     .card{background:linear-gradient(180deg,#151518,#121214);border:1px solid #1c1c21;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
     .media{position:relative;background:#0f0f12;aspect-ratio:4/3;display:grid;place-items:center}
@@ -45,10 +41,8 @@
     .size{padding:6px 10px;border:1px dashed #2a2a31;border-radius:10px;font-size:12px;color:#cfcfda}
     .actions{display:flex;gap:8px;margin-top:auto;padding:12px 14px;border-top:1px solid #1d1d22}
     .btn{flex:1;display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:11px 12px;border-radius:12px;border:1px solid #26262b;background:#1a1a1f;color:#f0f0f5;text-decoration:none;font-weight:700}
-
     footer{padding:30px 16px;color:#bfbfc6;border-top:1px solid #1c1c22}
     footer a{color:#fff;text-decoration:underline dotted}
-
     dialog{width:min(880px,92vw);border:none;border-radius:20px;background:#0f0f12;color:var(--text);box-shadow:var(--shadow)}
     dialog::backdrop{background:rgba(0,0,0,.6)}
     .modal{display:grid;grid-template-columns:1fr 1fr}
@@ -63,7 +57,6 @@
     .navbtn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid #2a2a2f;color:#fff;border-radius:12px;padding:8px 12px;cursor:pointer}
     .navbtn.prev{left:10px}
     .navbtn.next{right:10px}
-
     @media (max-width:860px){
       .controls{grid-template-columns:1fr 1fr}
       .hero{flex-direction:column;align-items:flex-start}
@@ -84,9 +77,7 @@
       </div>
       <div class="controls" role="search" aria-label="Filtry katalogu">
         <input class="input" id="q" placeholder="Hledat: model / barva / kód…" aria-label="Hledat"/>
-        <select id="size" aria-label="Velikost">
-          <option value="">Velikost (EU)</option>
-        </select>
+        <select id="size" aria-label="Velikost"><option value="">Velikost (EU)</option></select>
         <button class="cta" id="contactAll" title="Kontaktovat">Kontaktovat</button>
       </div>
       <div class="hero">
@@ -141,8 +132,7 @@
 
   <script>
     /* ===== KONFIG ===== */
-    var STORE = {
-      name: "Poslední páry Dr. Martens",
+    const STORE = {
       phone: "+420724535569",
       email: "alexandr.barta1@gmail.com",
       whatsappGreeting: "Ahoj, mám zájem o tyto boty:",
@@ -151,200 +141,150 @@
     };
 
     /* Placeholder fallback pro rozbité obrázky */
-    var PLACEHOLDER_SVG = 'data:image/svg+xml,' + encodeURIComponent(
-      "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450'>" +
-      "<rect width='600' height='450' fill='#0a0a0c'/>" +
-      "<text x='50%' y='52%' fill='#7a7a80' text-anchor='middle' font-size='24' font-family='Arial'>Foto bude doplněno</text>" +
-      "</svg>"
-    );
+    const PLACEHOLDER_SVG =
+      'data:image/svg+xml,' +
+      encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450'><rect width='600' height='450' fill='#0a0a0c'/><text x='50%' y='52%' fill='#7a7a80' text-anchor='middle' font-size='24' font-family='Arial'>Foto bude doplněno</text></svg>");
     function fallbackImg(img){ img.onerror=null; img.src=PLACEHOLDER_SVG; }
 
-    /* ===== PRODUKTY – Polley → LEO ===== */
-    var PRODUCTS = [
-      { id:"polley-5027", name:"Dr. Martens Polley – Černé Mary Jane", sizes:["37"], price:2990,
-        imgs:[ "images/REPLACE-polley-1.jpg","images/REPLACE-polley-2.jpg" ] },
-
-      { id:"drench-holinky", name:"Dr. Martens Drench – Černé holínky", sizes:["37","38"], price:990,
-        imgs:[ "images/Drench holinky.webp" ] },
-
-      { id:"bbex-tan-bex-1460", name:"Dr. Martens 1460 Bex – Hnědé kožené", sizes:["43"], price:3499,
-        imgs:[ "images/REPLACE-1460-bex-1.jpg","images/REPLACE-1460-bex-2.jpg" ] },
-
-      { id:"cesca-red-r-3j65", name:"Dr. Martens Cesca – Červené kožené", sizes:["38","39"], price:990,
-        imgs:[ "images/REPLACE-cesca-red-1.jpg" ] },
-
-      { id:"kara-red-r3j64", name:"Dr. Martens Kara – Červené kožené", sizes:["38","39"], price:1099,
-        imgs:[ "images/REPLACE-kara-red-1.jpg" ] },
-
-      { id:"serena-1460", name:"Dr. Martens Serena – Černé s kožíškem", sizes:["38","39","40"], price:3499,
-        imgs:[ "images/REPLACE-serena-1.jpg","images/REPLACE-serena-2.jpg" ] },
-
-      { id:"b1420", name:"Dr. Martens B1420 – Černé se zipem", sizes:["38","39","40"], price:1499,
-        imgs:[ "images/REPLACE-b1420-1.jpg" ] },
-
-      { id:"redford-navy", name:"Dr. Martens Redford – Námořnická modrá", sizes:["43"], price:1999,
-        imgs:[ "images/Redford Navy 1.webp","images/Redford Navy 2.webp","images/Redford Navy 3.webp","images/Redford Navy.webp" ] },
-
-      { id:"n1460-nappa", name:"Dr. Martens 1460 – Nappa", sizes:["38"], price:2990,
-        imgs:[ "images/Nappa 1460 1.avif","images/Nappa 1460 2.avif","images/Nappa 1460 3.avif","images/Nappa 1460.avif" ] },
-
-      { id:"bpat-1460-bex-pascal", name:"Dr. Martens 1460 Pascal Bex – Tan Inuck", sizes:["37"], price:3499,
-        imgs:[ "images/Bex pascal 1460 1.jpg","images/Bex pascal 1460 2.webp","images/Bex pascal 1460.jpg" ] },
-
-      { id:"wbsm-1460", name:"Dr. Martens 1460 – Černé s bílým šitím", sizes:["38"], price:3499,
-        imgs:[ "images/REPLACE-1460-wbsm-1.jpg" ] },
-
-      { id:"hicky-1460", name:"Dr. Martens 1460 – Černé s kontrastními tkaničkami", sizes:["37","38"], price:1999,
-        imgs:[ "images/Hickey 1460 1.webp","images/Hickey 1460 2.webp","images/Hickey 1460.webp" ] },
-
-      { id:"chay-1460", name:"Dr. Martens 1460 – Černé s puntíky", sizes:["37","38"], price:3499,
-        imgs:[ "images/Chay 1460 1.webp","images/Chay 1460 2.webp","images/Chay 1460.webp" ] },
-
-      { id:"bg-939-black-greasy", name:"Dr. Martens 939 – Black Greasy", sizes:["39","43"], price:3499,
-        imgs:[ "images/BG 939 1.webp","images/BG 939 2.webp","images/BG 939 3.webp","images/BG 939.webp" ] },
-
-      { id:"reeder", name:"Dr. Martens Reeder – Černé kožené", sizes:["43"], price:2990,
-        imgs:[ "images/Reeder 1.avif","images/Reeder 1.webp","images/Reeder 2.webp","images/Reeder 3.webp","images/Reeder.webp" ] },
-
-      { id:"bc-1460", name:"Dr. Martens 1460 – Růžové kožené", sizes:["37","38"], price:1990,
-        imgs:[ "images/REPLACE-1460-pink-1.jpg" ] },
-
-      { id:"g-ch1461", name:"Dr. Martens 1461 – Černé kožené", sizes:["43"], price:2990,
-        imgs:[ "images/REPLACE-1461-black-1.jpg" ] },
-
-      { id:"amor-1461", name:"Dr. Martens 1461 Amor – Černé", sizes:["37"], price:2990,
-        imgs:[ "images/Amor 1461.webp","images/Amor 1461 2.webp","images/Amor 1461 3.webp","images/Amor-1461-1.webp" ] },
-
-      { id:"bpat1461", name:"Dr. Martens 1461 Bex – Černé kožené", sizes:["37"], price:1499,
-        imgs:[ "images/REPLACE-1461-bex-1.jpg" ] },
-
-      { id:"flora-1460-dfl", name:"Dr. Martens Flora – Černé kožené", sizes:["37","38"], price:3499,
-        imgs:[ "images/Flora 1460 1.webp","images/Flora 1460 2.webp","images/Flora 1460.webp" ] },
-
-      { id:"flora-1460-navy", name:"Dr. Martens Flora – Námořnická modrá", sizes:["38","39"], price:3499,
-        imgs:[ "images/Flora navy 1460 1.webp","images/Flora navy 1460 2.webp","images/Flora navy 1460.webp" ] },
-
-      { id:".939-misc", name:"Dr. Martens 939 – Černé kožené", sizes:["36","39","43"], price:2999,
-        imgs:[ "images/REPLACE-939-1.jpg" ] },
-
-      { id:"leo-1460", name:"Dr. Martens 1460 – Leopardí vzor", sizes:["37","38","39"], price:1499,
-        imgs:[ "images/LEO 1460 1.avif","images/LEO 1460.avif" ] }
+    /* ===== PRODUKTY – POLLEY → LEO ===== */
+    const PRODUCTS = [
+      { id:"polley-5027", name:"Dr. Martens Polley – Černé Mary Jane", sizes:["37"], price:2990, imgs:["images/REPLACE-polley-1.jpg","images/REPLACE-polley-2.jpg"] },
+      { id:"drench-holinky", name:"Dr. Martens Drench – Černé holínky", sizes:["37","38"], price:990, imgs:["images/Drench holinky.webp"] },
+      { id:"bbex-tan-bex-1460", name:"Dr. Martens 1460 Bex – Hnědé kožené", sizes:["43"], price:3499, imgs:["images/REPLACE-1460-bex-1.jpg","images/REPLACE-1460-bex-2.jpg"] },
+      { id:"cesca-red-r-3j65", name:"Dr. Martens Cesca – Červené kožené", sizes:["38","39"], price:990, imgs:["images/REPLACE-cesca-red-1.jpg"] },
+      { id:"kara-red-r3j64", name:"Dr. Martens Kara – Červené kožené", sizes:["38","39"], price:1099, imgs:["images/REPLACE-kara-red-1.jpg"] },
+      { id:"serena-1460", name:"Dr. Martens Serena – Černé s kožíškem", sizes:["38","39","40"], price:3499, imgs:["images/REPLACE-serena-1.jpg","images/REPLACE-serena-2.jpg"] },
+      { id:"b1420", name:"Dr. Martens B1420 – Černé se zipem", sizes:["38","39","40"], price:1499, imgs:["images/REPLACE-b1420-1.jpg"] },
+      { id:"redford-navy", name:"Dr. Martens Redford – Námořnická modrá", sizes:["43"], price:1999, imgs:["images/Redford Navy 1.webp","images/Redford Navy 2.webp","images/Redford Navy 3.webp","images/Redford Navy.webp"] },
+      { id:"n1460-nappa", name:"Dr. Martens 1460 – Nappa", sizes:["38"], price:2990, imgs:["images/Nappa 1460 1.avif","images/Nappa 1460 2.avif","images/Nappa 1460 3.avif","images/Nappa 1460.avif"] },
+      { id:"bpat-1460-bex-pascal", name:"Dr. Martens 1460 Pascal Bex – Tan Inuck", sizes:["37"], price:3499, imgs:["images/Bex pascal 1460 1.jpg","images/Bex pascal 1460 2.webp","images/Bex pascal 1460.jpg"] },
+      { id:"wbsm-1460", name:"Dr. Martens 1460 – Černé s bílým šitím", sizes:["38"], price:3499, imgs:["images/REPLACE-1460-wbsm-1.jpg"] },
+      { id:"hicky-1460", name:"Dr. Martens 1460 – Černé s kontrastními tkaničkami", sizes:["37","38"], price:1999, imgs:["images/Hickey 1460 1.webp","images/Hickey 1460 2.webp","images/Hickey 1460.webp"] },
+      { id:"chay-1460", name:"Dr. Martens 1460 – Černé s puntíky", sizes:["37","38"], price:3499, imgs:["images/Chay 1460 1.webp","images/Chay 1460 2.webp","images/Chay 1460.webp"] },
+      { id:"bg-939-black-greasy", name:"Dr. Martens 939 – Black Greasy", sizes:["39","43"], price:3499, imgs:["images/BG 939 1.webp","images/BG 939 2.webp","images/BG 939 3.webp","images/BG 939.webp"] },
+      { id:"reeder", name:"Dr. Martens Reeder – Černé kožené", sizes:["43"], price:2990, imgs:["images/Reeder 1.avif","images/Reeder 1.webp","images/Reeder 2.webp","images/Reeder 3.webp","images/Reeder.webp"] },
+      { id:"bc-1460", name:"Dr. Martens 1460 – Růžové kožené", sizes:["37","38"], price:1990, imgs:["images/REPLACE-1460-pink-1.jpg"] },
+      { id:"g-ch1461", name:"Dr. Martens 1461 – Černé kožené", sizes:["43"], price:2990, imgs:["images/REPLACE-1461-black-1.jpg"] },
+      { id:"amor-1461", name:"Dr. Martens 1461 Amor – Černé", sizes:["37"], price:2990, imgs:["images/Amor 1461.webp","images/Amor 1461 2.webp","images/Amor 1461 3.webp","images/Amor-1461-1.webp"] },
+      { id:"bpat1461", name:"Dr. Martens 1461 Bex – Černé kožené", sizes:["37"], price:1499, imgs:["images/REPLACE-1461-bex-1.jpg"] },
+      { id:"flora-1460-dfl", name:"Dr. Martens Flora – Černé kožené", sizes:["37","38"], price:3499, imgs:["images/Flora 1460 1.webp","images/Flora 1460 2.webp","images/Flora 1460.webp"] },
+      { id:"flora-1460-navy", name:"Dr. Martens Flora – Námořnická modrá", sizes:["38","39"], price:3499, imgs:["images/Flora navy 1460 1.webp","images/Flora navy 1460 2.webp","images/Flora navy 1460.webp"] },
+      { id:".939-misc", name:"Dr. Martens 939 – Černé kožené", sizes:["36","39","43"], price:2999, imgs:["images/REPLACE-939-1.jpg"] },
+      { id:"leo-1460", name:"Dr. Martens 1460 – Leopardí vzor", sizes:["37","38","39"], price:1499, imgs:["images/LEO 1460 1.avif","images/LEO 1460.avif"] }
     ];
 
     /* ===== HELPERS ===== */
-    function el(s){ return document.querySelector(s); }
-    function money(n){ return new Intl.NumberFormat('cs-CZ',{style:'currency',currency:'CZK',maximumFractionDigits:0}).format(n); }
-    function waLink(text){ return 'https://wa.me/' + STORE.phone.replace(/\D/g,'') + '?text=' + encodeURIComponent(text); }
+    const el = s => document.querySelector(s);
+    const money = n => new Intl.NumberFormat('cs-CZ',{style:'currency',currency:'CZK',maximumFractionDigits:0}).format(n);
+    const waLink = text => `https://wa.me/${STORE.phone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
 
-    /* sizes do filtru */
-    var ALL_SIZES=[], i,j;
-    for(i=0;i<PRODUCTS.length;i++){ var ps=PRODUCTS[i].sizes||[]; for(j=0;j<ps.length;j++){ if(ALL_SIZES.indexOf(ps[j])===-1) ALL_SIZES.push(ps[j]); } }
-    ALL_SIZES.sort(function(a,b){ return parseInt(a)-parseInt(b); });
-    var sizeSel = el('#size'); for(i=0;i<ALL_SIZES.length;i++){ var o=document.createElement('option'); o.value=ALL_SIZES[i]; o.textContent='EU '+ALL_SIZES[i]; sizeSel.appendChild(o); }
+    /* Sizes → filtr */
+    const ALL_SIZES = [...new Set(PRODUCTS.flatMap(p => p.sizes))].sort((a,b)=>+a-+b);
+    const sizeSel = el('#size');
+    ALL_SIZES.forEach(s => { const o=document.createElement('option'); o.value=s; o.textContent=`EU ${s}`; sizeSel.appendChild(o); });
 
-    /* patička + rok + kontakty */
+    /* Patička + kontakty */
     el('#waLink').href = waLink('Ahoj, mám dotaz k botám z katalogu.');
     el('#msgrLink').href = STORE.messenger;
-    el('#telLink').href = 'tel:'+STORE.phone;
+    el('#telLink').href = `tel:${STORE.phone}`;
     el('#year').textContent = new Date().getFullYear();
-    el('#contactAll').addEventListener('click', function(){ location.href = STORE.messenger; });
+    el('#contactAll').addEventListener('click', ()=> location.href = STORE.messenger);
 
-    /* render grid */
-    var grid = el('#grid');
+    /* Render grid */
+    const grid = el('#grid');
+    function cardHTML(p){
+      const firstImg = (p.imgs && p.imgs.length) ? p.imgs[0] : '';
+      const sizesBadges = (p.sizes||[]).map(s=>`<span class="size">EU ${s}</span>`).join('');
+      return `
+        <article class="card">
+          <div class="media" role="img" aria-label="${p.name}">
+            <img src="${firstImg}" alt="${p.name}" loading="lazy" onerror="fallbackImg(this)">
+            ${p.last<=1 ? '<div class="flag">Poslední kus</div>' : ''}
+            <div class="sold">EU ${p.sizes.join(', ')}</div>
+          </div>
+          <div class="body">
+            <div class="title">${p.name}</div>
+            <div class="meta"></div>
+            <div class="price"><div class="now">${money(p.price)}</div>${p.was?`<div class="was">${money(p.was)}</div>`:''}</div>
+            <div class="sizes">${sizesBadges}</div>
+          </div>
+          <div class="actions">
+            <a class="btn detail" href="#" data-id="${p.id}">Detail</a>
+            <a class="btn contact" href="#" data-id="${p.id}">Kontaktovat</a>
+          </div>
+        </article>`;
+    }
     function render(list){
-      grid.innerHTML='';
       if(!list.length){
-        grid.innerHTML='<div style="grid-column:1/-1;color:#bdbdc6;padding:20px">Nic jsme nenašli. Zkus filtr nebo napiš – často máme i jiné páry.</div>';
+        grid.innerHTML = `<div style="grid-column:1/-1;color:#bdbdc6;padding:20px">Nic jsme nenašli. Zkus filtr nebo napiš – často máme i jiné páry.</div>`;
         return;
       }
-      for(i=0;i<list.length;i++){
-        var p=list[i], color=p.color||'', sizesBadges='', firstImg=(p.imgs&&p.imgs.length)?p.imgs[0]:'';
-        for(j=0;j<p.sizes.length;j++){ sizesBadges+='<span class="size">EU '+p.sizes[j]+'</span>'; }
-        var card=document.createElement('article'); card.className='card';
-        card.innerHTML =
-          '<div class="media" role="img" aria-label="'+p.name+' '+color+'">'+
-            '<img src="'+firstImg+'" alt="'+p.name+' '+color+'" loading="lazy" onerror="fallbackImg(this)">'+
-            (p.last<=1 ? '<div class="flag">Poslední kus</div>' : '')+
-            '<div class="sold">EU '+p.sizes.join(', ')+'</div>'+
-          '</div>'+
-          '<div class="body">'+
-            '<div class="title">'+p.name+'</div>'+
-            '<div class="meta">'+color+'</div>'+
-            '<div class="price"><div class="now">'+money(p.price)+'</div>'+ (p.was?'<div class="was">'+money(p.was)+'</div>':'') +'</div>'+
-            '<div class="sizes">'+sizesBadges+'</div>'+
-          '</div>'+
-          '<div class="actions">'+
-            '<a class="btn detail" href="#" data-id="'+p.id+'">Detail</a>'+
-            '<a class="btn contact" href="#" data-id="'+p.id+'">Kontaktovat</a>'+
-          '</div>';
-
-        var go = (function(id){ return function(e){ e.preventDefault(); openDetailById(id); }; })(p.id);
-        card.querySelector('.detail').addEventListener('click', go);
-        card.querySelector('.contact').addEventListener('click', go);
-        grid.appendChild(card);
-      }
+      grid.innerHTML = list.map(cardHTML).join('');
+      grid.querySelectorAll('.detail,.contact').forEach(a=>{
+        a.addEventListener('click', e=>{
+          e.preventDefault();
+          const id = a.getAttribute('data-id');
+          const prod = PRODUCTS.find(x=>x.id===id);
+          if(prod) openDetail(prod);
+        });
+      });
     }
 
-    function openDetailById(id){
-      for(i=0;i<PRODUCTS.length;i++){ if(PRODUCTS[i].id===id){ openDetail(PRODUCTS[i]); return; } }
-    }
-
-    /* filtry */
+    /* Filtry */
     function applyFilters(){
-      var q = el('#q').value.trim().toLowerCase();
-      var size = el('#size').value;
-      var list = [];
-      for(i=0;i<PRODUCTS.length;i++){
-        var p=PRODUCTS[i];
-        var text=(p.name+' '+(p.color||'')).toLowerCase();
-        var okQ = !q || text.indexOf(q)>-1;
-        var okSize = !size || (p.sizes||[]).indexOf(size)>-1;
-        if(okQ && okSize) list.push(p);
-      }
+      const q = el('#q').value.trim().toLowerCase();
+      const size = el('#size').value;
+      const list = PRODUCTS.filter(p=>{
+        const text = `${p.name}`.toLowerCase();
+        const okQ = !q || text.includes(q);
+        const okSize = !size || (p.sizes||[]).includes(size);
+        return okQ && okSize;
+      });
       render(list);
     }
     el('#q').addEventListener('input', applyFilters);
     el('#size').addEventListener('input', applyFilters);
 
-    /* modal + šipky galerie */
-    var detail = el('#detail'), curIdx = 0, curImgs = [];
+    /* Modal + šipky */
+    const detail = el('#detail');
+    let curImgs = [], curIdx = 0;
     function setMain(i){
-      if(!curImgs.length) { el('#dimg').src=''; return; }
+      if(!curImgs.length){ el('#dimg').src=''; return; }
       if(i<0) i = curImgs.length-1;
       if(i>=curImgs.length) i = 0;
       curIdx = i;
       el('#dimg').src = curImgs[i];
-      el('#dimg').onerror = function(){ fallbackImg(this); };
+      el('#dimg').onerror = () => fallbackImg(el('#dimg'));
     }
-
     function openDetail(p){
       el('#dtitle').textContent = p.name;
-      el('#dmeta').textContent = p.color||'';
+      el('#dmeta').textContent = '';
       el('#dprice').textContent = money(p.price);
       el('#dwas').textContent = p.was ? money(p.was) : '';
-      el('#dcode').textContent = p.code ? ('Kód: '+p.code) : '';
-
-      var dsize = el('#dsize'); dsize.innerHTML='';
-      for(i=0;i<(p.sizes||[]).length;i++){ var o=document.createElement('option'); o.value=p.sizes[i]; o.textContent='EU '+p.sizes[i]; dsize.appendChild(o); }
-
+      el('#dcode').textContent = p.code ? `Kód: ${p.code}` : '';
+      const dsize = el('#dsize'); dsize.innerHTML='';
+      (p.sizes||[]).forEach(s=>{ const o=document.createElement('option'); o.value=s; o.textContent=`EU ${s}`; dsize.appendChild(o); });
       curImgs = (p.imgs && p.imgs.length) ? p.imgs : [];
       setMain(0);
-
-      el('#prevImg').onclick = function(){ setMain(curIdx-1); };
-      el('#nextImg').onclick = function(){ setMain(curIdx+1); };
-
-      var base = STORE.whatsappGreeting+'\n'+p.name+'\nVelikost: '+(p.sizes&&p.sizes[0]?p.sizes[0]:'')+'\nMěsto: '+STORE.city;
+      el('#prevImg').onclick = ()=> setMain(curIdx-1);
+      el('#nextImg').onclick = ()=> setMain(curIdx+1);
+      const base = `${STORE.whatsappGreeting}
+${p.name}
+Velikost: ${(p.sizes&&p.sizes[0])?p.sizes[0]:''}
+Město: ${STORE.city}`;
       el('#dwhats').href = waLink(base);
-      el('#dmsgr').href  = STORE.messenger;
+      el('#dmsgr').href = STORE.messenger;
       dsize.addEventListener('change', function(){
-        var b = STORE.whatsappGreeting+'\n'+p.name+'\nVelikost: '+this.value+'\nMěsto: '+STORE.city;
+        const b = `${STORE.whatsappGreeting}
+${p.name}
+Velikost: ${this.value}
+Město: ${STORE.city}`;
         el('#dwhats').href = waLink(b);
       });
-
       detail.showModal();
     }
 
-    /* start */
+    /* Start */
     applyFilters();
   </script>
 </body>
