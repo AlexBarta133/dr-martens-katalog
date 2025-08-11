@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dr. Martens – katalog | Poslední kusy</title>
+  <meta name="description" content="Katalog posledních párů Dr. Martens. Napiš nám na WhatsApp a domluvíme se na doručení nebo osobním převzetí." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffd200'/><text x='50' y='58' font-size='56' text-anchor='middle' font-family='Arial' fill='%23000'>DM</text></svg>">
+
+  <!-- Open Graph / share preview -->
+  <meta property="og:title" content="Dr. Martens – katalog | Poslední kusy" />
+  <meta property="og:description" content="Mrkni na poslední páry Dr. Martens a napiš nám na WhatsApp – domluvíme se na doručení / dobírce." />
+  <meta property="og:type" content="website" />
+  <!-- Po nahrání do GitHub Pages změň og:image na absolutní URL tvého obrázku v repu -->
+  <meta property="og:image" content="" />
+  <meta property="og:url" content="" />
+
+  <!-- Meta Pixel (nahraď PIXEL_ID svým ID) -->
+  <script>
+    // Pokud nechceš hned pixel, klidně tenhle blok vymaž.
+    // window.fbq nástřel – nebude padat, i když není načtený externí skript
+    window.fbq = function(){ fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments) };
+    if(!window._fbq) window._fbq = fbq;
+    fbq.push = fbq; fbq.loaded = true; fbq.version = '2.0'; fbq.queue = [];
+  </script>
+  <script async src="https://connect.facebook.net/en_US/fbevents.js"></script>
+  <script>
+    // ZADEJ SVŮJ PIXEL ID:
+    const META_PIXEL_ID = "PIXEL_ID"; // ← nahraď číslem nebo nech prázdné "" a nic se neposílá
+    if (META_PIXEL_ID && META_PIXEL_ID !== "PIXEL_ID") {
+      fbq('init', META_PIXEL_ID);
+      fbq('track', 'PageView');
+    }
+  </script>
+  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+
+  <style>
+    :root{
+      --bg: #0b0b0c;
+      --panel: #121214;
+      --muted: #7a7a80;
+      --text: #eaeaf0;
+      --brand: #ffd200; /* Dr. Martens yellow vibe */
+      --brand-ink: #151515;
+      --ok: #27ae60;
+      --danger: #ff5c5c;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";}
+    a{color:inherit}
+
+    /* Top bar */
+    .topbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(18,18,20,.96), rgba(18,18,20,.86));backdrop-filter: blur(8px);border-bottom:1px solid #1e1e22}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:42px;height:42px;border-radius:12px;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-weight:800;}
+    .brand h1{font-size:20px;margin:0}
+    .brand small{color:var(--muted)}
+
+    /* Controls */
+    .controls{display:grid;grid-template-columns: 1fr 140px 140px 160px;gap:10px;margin-top:12px}
+    .input, select, button{background:#1a1a1f;border:1px solid #26262b;color:var(--text);border-radius:12px;padding:12px 14px;font-size:14px;}
+    .input:focus, select:focus{outline:2px solid #2a2a33;border-color:#2a2a33}
+    .cta{background:var(--brand);color:#111;font-weight:700;border:none;cursor:pointer}
+    .cta:active{transform:translateY(1px)}
+
+    /* Hero */
+    .hero{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 16px 8px}
+    .hero p{margin:0;color:var(--muted)}
+    .hero .badges{display:flex;flex-wrap:wrap;gap:8px}
+    .badge{padding:6px 10px;border-radius:999px;background:#1a1a1f;border:1px solid #26262b;color:#c9c9cf;font-size:12px}
+    .badge.brand{background:var(--brand);color:#111;border:none;font-weight:800}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));gap:14px;padding:16px}
+    .card{background:linear-gradient(180deg,#151518,#121214);border:1px solid #1c1c21;border-radius: var(--radius);box-shadow: var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+    .media{position:relative;background:#0f0f12;aspect-ratio: 4/3;display:grid;place-items:center}
+    .media img{width:100%;height:100%;object-fit:cover;display:block}
+    .flag{position:absolute;top:10px;left:10px;background:var(--brand);color:#111;padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px}
+    .sold{position:absolute;top:10px;right:10px;background:#1a1a1f;border:1px solid #2a2a2f;color:#bbb;padding:6px 10px;border-radius:999px;font-size:12px}
+    .body{padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px}
+    .title{font-weight:800;letter-spacing:.2px}
+    .meta{color:#c9c9cf;font-size:13px}
+    .price{display:flex;align-items:baseline;gap:8px}
+    .price .now{font-weight:900;font-size:20px}
+    .price .was{color:#999;text-decoration:line-through}
+    .sizes{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+    .size{padding:6px 10px;border:1px dashed #2a2a31;border-radius:10px;font-size:12px;color:#cfcfda}
+    .actions{display:flex;gap:8px;margin-top:auto;padding:12px 14px;border-top:1px solid #1d1d22}
+    .btn{flex:1;display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:11px 12px;border-radius:12px;border:1px solid #26262b;background:#1a1a1f;color:#f0f0f5;text-decoration:none;font-weight:700}
+    .btn.whatsapp{background:var(--brand);color:#111;border:none}
+
+    /* Footer */
+    footer{padding:30px 16px;color:#bfbfc6;border-top:1px solid #1c1c22}
+    footer a{color:#fff;text-decoration:underline dotted}
+
+    /* Modal */
+    dialog{width:min(880px, 92vw);border:none;border-radius:20px;background:#0f0f12;color:var(--text);box-shadow:var(--shadow)}
+    dialog::backdrop{background:rgba(0,0,0,.6)}
+    .modal{display:grid;grid-template-columns: 1fr 1fr}
+    .modal .left{padding:0;background:#0a0a0c}
+    .modal .left img{width:100%;height:100%;object-fit:cover}
+    .modal .right{padding:18px}
+    .modal h3{margin:0 0 6px 0}
+    .modal .muted{color:#b9b9c0}
+    .modal .opt{display:flex;gap:10px;margin:12px 0 16px}
+    .opt select{flex:1}
+    .close{position:absolute;top:10px;right:10px;border:none;background:#1a1a1f;border:1px solid #2a2a2f;color:#ddd;border-radius:10px;padding:8px 10px;cursor:pointer}
+
+    @media (max-width: 860px){
+      .controls{grid-template-columns: 1fr 1fr;}
+      .hero{flex-direction:column;align-items:flex-start}
+      .modal{grid-template-columns:1fr}
+      .modal .left{aspect-ratio: 4/3}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">
+        <div class="logo" aria-label="logo">DM</div>
+        <div>
+          <h1>Dr. Martens – poslední páry</h1>
+          <small>Kontakt přes WhatsApp • domluva / dobírka / osobně</small>
+        </div>
+      </div>
+      <div class="controls" role="search" aria-label="Filtry katalogu">
+        <input class="input" id="q" placeholder="Hledat: model / barva / kód…" aria-label="Hledat"/>
+        <select id="size" aria-label="Velikost">
+          <option value="">Velikost (EU)</option>
+        </select>
+        <select id="sort" aria-label="Řazení">
+          <option value="new">Nejnovější</option>
+          <option value="price_asc">Cena ↑</option>
+          <option value="price_desc">Cena ↓</option>
+        </select>
+        <button class="cta" id="whatsappAll" title="Otevřít WhatsApp chat">Napsat na WhatsApp</button>
+      </div>
+      <div class="hero">
+        <p>Vyprodáváme sklad ≤ poslední kusy. Pokud chceš jinou velikost, napiš – zkusíme dohledat.
+        </p>
+        <div class="badges">
+          <span class="badge brand">Rychlá domluva</span>
+          <span class="badge">Osobní odběr / dobírka</span>
+          <span class="badge">Záruka vrácení dle domluvy</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="grid" id="grid" aria-live="polite"></section>
+  </main>
+
+  <footer class="container">
+    <strong>Kontakt:</strong> <a id="waLink" href="#" rel="nofollow noopener">WhatsApp</a> • <a id="telLink" href="#">Telefon</a> • <a id="mailLink" href="#">E‑mail</a>
+    <div style="margin-top:10px;color:#9a9aa2">© <span id="year"></span> Poslední páry Dr. Martens • Jednoduchý katalog, nákup až po domluvě</div>
+  </footer>
+
+  <!-- DETAIL MODAL -->
+  <dialog id="detail">
+    <button class="close" onclick="detail.close()" aria-label="Zavřít">✕</button>
+    <div class="modal">
+      <div class="left"><img id="dimg" alt="Náhled produktu" loading="lazy"></div>
+      <div class="right">
+        <h3 id="dtitle"></h3>
+        <div class="muted" id="dmeta"></div>
+        <div class="price" style="margin:8px 0 2px">
+          <div class="now" id="dprice"></div>
+          <div class="was" id="dwas"></div>
+        </div>
+        <div class="muted" id="dcode"></div>
+        <div class="opt">
+          <select id="dsize"></select>
+          <a class="btn whatsapp" id="dwhats" target="_blank" rel="nofollow noopener">Napsat na WhatsApp</a>
+        </div>
+        <div style="color:#bdbdc6;font-size:14px">Domluvíme dopravu: osobně / zásilkovna / dobírka. Napiš, co ti sedne.</div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    // === KONFIGURACE (Uprav podle sebe) ===============================
+    const STORE = {
+      name: "Poslední páry Dr. Martens",
+      phone: "+420123456789",     // ← nahraď vlastním číslem pro WhatsApp i tel:
+      email: "info@example.com",   // ← e‑mail pro mailto:
+      whatsappGreeting: "Ahoj, mám zájem o tyto boty:",
+      city: "Praha",
+    };
+
+    // Produktový katalog – můžeš libovolně rozšířit / upravit
+    // size: EU velikosti (string)
+    // price: aktuální cena v Kč, was: původní cena (nepovinné)
+    // last: kolik párů – 1 zobrazí BADGE Poslední kus
+    // code: tvůj vnitřní kód (bude v předvyplněné zprávě)
+    const PRODUCTS = [
+      {
+        id: "1460-black-smooth",
+        name: "1460 Smooth Black",
+        color: "Black",
+        sizes: ["41","42","43"],
+        price: 2990,
+        was: 4290,
+        last: 2,
+        img: "images/1460-black.jpg",
+        code: "DM-1460-BLK",
+        tags: ["Unisex","8‑ey"]
+      },
+      {
+        id: "2976-chelsea-black",
+        name: "2976 Chelsea",
+        color: "Black",
+        sizes: ["40","41"],
+        price: 3190,
+        was: 4490,
+        last: 1,
+        img: "images/2976-black.jpg",
+        code: "DM-2976-BLK",
+        tags: ["Chelsea","Classic"]
+      },
+      {
+        id: "jadon-platform",
+        name: "Jadon Platform",
+        color: "Black",
+        sizes: ["38","39"],
+        price: 3790,
+        was: 5490,
+        last: 1,
+        img: "images/jadon-black.jpg",
+        code: "DM-JADON-BLK",
+        tags: ["Platform","Zip"]
+      }
+    ];
+
+    // === Pomocné funkce ==============================================
+    const el = sel => document.querySelector(sel);
+    const money = n => new Intl.NumberFormat('cs-CZ', {style:'currency', currency:'CZK', maximumFractionDigits:0}).format(n);
+    const waLink = (text) => `https://wa.me/${STORE.phone.replace(/\D/g,'')}?text=${encodeURIComponent(text)}`;
+
+    // Naplnění velikostí do filtru (unikátní EU velikosti napříč katalogem)
+    const ALL_SIZES = [...new Set(PRODUCTS.flatMap(p => p.sizes))].sort((a,b)=>parseInt(a)-parseInt(b));
+    const sizeSel = el('#size');
+    ALL_SIZES.forEach(s => { const o = document.createElement('option'); o.value=s; o.textContent = `EU ${s}`; sizeSel.appendChild(o); });
+
+    // Rychlé odkazy v patičce + rok
+    el('#waLink').href = waLink('Ahoj, mám dotaz k botám z katalogu.');
+    el('#telLink').href = `tel:${STORE.phone}`;
+    el('#mailLink').href = `mailto:${STORE.email}`;
+    el('#year').textContent = new Date().getFullYear();
+
+    // WhatsApp All CTA
+    el('#whatsappAll').addEventListener('click', ()=>{
+      location.href = waLink(`${STORE.whatsappGreeting} (obecný dotaz)\nMěsto: ${STORE.city}`);
+    });
+
+    // Render grid
+    const grid = el('#grid');
+    function render(list){
+      grid.innerHTML = '';
+      if(!list.length){
+        grid.innerHTML = `<div style="grid-column:1/-1;color:#bdbdc6;padding:20px">Nic jsme nenašli. Zkus upravit filtr nebo napiš na WhatsApp – často máme v záloze i jiné páry.</div>`;
+        return;
+      }
+      for(const p of list){
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="media" role="img" aria-label="${p.name} ${p.color}">
+            <img src="${p.img}" alt="${p.name} ${p.color}" loading="lazy" onerror="this.src='data:image/svg+xml,${encodeURIComponent(`<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 600 450\'><rect width=\'600\' height=\'450\' fill=\'%230a0a0c\'/><text x=\'50%\' y=\'52%\' fill=\'%237a7a80\' text-anchor=\'middle\' font-size=\'24\' font-family=\'Arial\'>Foto bude doplněno</text></svg>`)}'"/>
+            ${p.last<=1 ? '<div class="flag">Poslední kus</div>' : ''}
+            <div class="sold">EU ${p.sizes.join(', ')}</div>
+          </div>
+          <div class="body">
+            <div class="title">${p.name}</div>
+            <div class="meta">${p.color} • ${p.tags?.join(' • ') || ''}</div>
+            <div class="price">
+              <div class="now">${money(p.price)}</div>
+              ${p.was ? `<div class="was">${money(p.was)}</div>` : ''}
+            </div>
+            <div class="sizes">${p.sizes.map(s=>`<span class="size">EU ${s}</span>`).join('')}</div>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#" data-id="${p.id}">Detail</a>
+            <a class="btn whatsapp" target="_blank" rel="nofollow noopener" href="${waLink(`${STORE.whatsappGreeting}\n${p.name} (${p.color})\nKód: ${p.code}\nPreferovaná velikost: ${p.sizes[0]}\nMěsto: ${STORE.city}`)}">WhatsApp</a>
+          </div>
+        `;
+        // Detail action
+        card.querySelector('.btn[data-id]')?.addEventListener('click', (e)=>{
+          e.preventDefault();
+          openDetail(p);
+        });
+        grid.appendChild(card);
+      }
+    }
+
+    // Filtrace & řazení
+    function applyFilters(){
+      const q = el('#q').value.trim().toLowerCase();
+      const size = el('#size').value;
+      const sort = el('#sort').value;
+      let list = PRODUCTS.filter(p=>{
+        const text = `${p.name} ${p.color} ${p.code} ${p.tags?.join(' ')}`.toLowerCase();
+        const okQ = !q || text.includes(q);
+        const okSize = !size || p.sizes.includes(size);
+        return okQ && okSize;
+      });
+      if(sort==='price_asc') list.sort((a,b)=>a.price-b.price);
+      if(sort==='price_desc') list.sort((a,b)=>b.price-a.price);
+      if(sort==='new') list.sort((a,b)=> (b.was?1:0) - (a.was?1:0)); // primitivně zvýhodni slevy/novinky
+      render(list);
+    }
+    ['#q','#size','#sort'].forEach(sel=> el(sel).addEventListener('input', applyFilters));
+
+    // Detail modal
+    const detail = el('#detail');
+    function openDetail(p){
+      el('#dimg').src = p.img;
+      el('#dtitle').textContent = p.name;
+      el('#dmeta').textContent = `${p.color} • ${p.tags?.join(' • ') || ''}`;
+      el('#dprice').textContent = money(p.price);
+      el('#dwas').textContent = p.was ? money(p.was) : '';
+      el('#dcode').textContent = `Kód: ${p.code}`;
+      const dsize = el('#dsize');
+      dsize.innerHTML = '';
+      p.sizes.forEach(s=>{ const o=document.createElement('option'); o.value=s; o.textContent=`EU ${s}`; dsize.appendChild(o); });
+      const linkBase = `${STORE.whatsappGreeting}\n${p.name} (${p.color})\nKód: ${p.code}\nVelikost: `;
+      const setWhats = ()=> el('#dwhats').href = waLink(linkBase + dsize.value + `\nMěsto: ${STORE.city}`);
+      dsize.addEventListener('change', setWhats);
+      setWhats();
+      detail.showModal();
+    }
+
+    // Start
+    applyFilters();
+  </script>
+</body>
+</html>
