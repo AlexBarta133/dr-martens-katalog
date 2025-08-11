@@ -11,7 +11,19 @@
     a{color:inherit}
 
     /* Top */
-    .topbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(18,18,20,.96), rgba(18,18,20,.86));backdrop-filter: blur(8px);border-bottom:1px solid #1e1e22}
+    .topbar{
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: linear-gradient(180deg, rgba(18,18,20,.96), rgba(18,18,20,.86));
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #1e1e22;
+  padding-top: env(safe-area-inset-top);       /* pro notch */
+  transition: transform .25s ease;             /* animace schování */
+}
+.topbar.hide{
+  transform: translateY(calc(-100% - env(safe-area-inset-top)));
+}
     .container{max-width:1100px;margin:0 auto;padding:16px}
     .brand{display:flex;gap:12px;align-items:center}
     .logo{width:42px;height:42px;border-radius:12px;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-weight:800}
@@ -367,6 +379,21 @@ Město: ${STORE.city}`;
     el('#waLink').href = waLink('Ahoj, mám dotaz k botám z katalogu.');
     el('#telLink').href = 'tel:'+STORE.phone;
     applyFilters();
+// Auto-hide topbar na mobilu: schovej při scrollu dolů, ukaž při scrollu nahoru
+(function(){
+  const bar = document.querySelector('.topbar');
+  if(!bar) return;
+  let lastY = window.scrollY || 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY || 0;
+    if (y > lastY + 6 && y > 80) {
+      bar.classList.add('hide');     // jedeš dolů → schovej
+    } else if (y < lastY - 6) {
+      bar.classList.remove('hide');  // jedeš nahoru → ukaž
+    }
+    lastY = y;
+  }, { passive: true });
+})();
   </script>
 </body>
 </html>
