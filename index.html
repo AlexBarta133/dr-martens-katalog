@@ -329,7 +329,6 @@
 Město: ${STORE.city}`;
       location.href = `mailto:${STORE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
-    });
 
     // Render grid
     const grid = el('#grid');
@@ -367,29 +366,25 @@ Město: ${STORE.city}`;
           e.preventDefault();
           openDetail(p);
         });
+        // Kontaktovat na kartě → otevře detail
+        card.querySelector('.contact')?.addEventListener('click', (e)=>{
+          e.preventDefault();
+          openDetail(p);
+        });
         grid.appendChild(card);
       }
     }
 
-    // Filtrace & řazení
+    // Filtrace (bez řazení)
     function applyFilters(){
       const q = el('#q').value.trim().toLowerCase();
       const size = el('#size').value;
       let list = PRODUCTS.filter(p=>{
-        const text = `${p.name} ${p.color} ${p.code} ${p.tags?.join(' ')}`.toLowerCase();
+        const text = `${p.name} ${p.color ?? ''} ${p.code ?? ''} ${(p.tags||[]).join(' ')}`.toLowerCase();
         const okQ = !q || text.includes(q);
         const okSize = !size || p.sizes.includes(size);
         return okQ && okSize;
       });
-      render(list);
-    } ${p.color} ${p.code} ${p.tags?.join(' ')}`.toLowerCase();
-        const okQ = !q || text.includes(q);
-        const okSize = !size || p.sizes.includes(size);
-        return okQ && okSize;
-      });
-      if(sort==='price_asc') list.sort((a,b)=>a.price-b.price);
-      if(sort==='price_desc') list.sort((a,b)=>b.price-a.price);
-      if(sort==='new') list.sort((a,b)=> (b.was?1:0) - (a.was?1:0)); // primitivně zvýhodni slevy/novinky
       render(list);
     }
     ['#q','#size'].forEach(sel=> el(sel).addEventListener('input', applyFilters));
